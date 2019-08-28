@@ -37,11 +37,6 @@ span {
   position: relative;
 }
 
-.section-1 {
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
 .section-home {
   background: ghostwhite !important;
 }
@@ -189,8 +184,6 @@ span {
   background-image: linear-gradient(to right, #054f7d, #00a7cf, #efe348, #861a54, #054f7d);
   background-size: 600%;
   background-position: 0 0;
-  -webkit-box-shadow: inset 0 0 5em rgba(0, 0, 0, 0.5);
-          box-shadow: inset 0 0 5em rgba(0, 0, 0, 0.5);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -198,7 +191,6 @@ span {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  /* Animation */
   -webkit-animation-duration: 20s;
           animation-duration: 20s;
   -webkit-animation-iteration-count: infinite;
