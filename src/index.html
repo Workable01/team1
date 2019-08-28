@@ -15,7 +15,7 @@
 <body>
     <div id="fullpage">
         <div class="section section-home">
-            <div class="txt" contenteditable="true">
+            <div id="animation">
             TEAM No. 1
             </div>
         </div>
@@ -121,7 +121,8 @@
     <script src="lightbox.min.js" defer></script>
         <script>
         $(window).on('load',function() {
-            $(".se-pre-con").fadeOut("slow");;
+            $(".se-pre-con").fadeOut("slow");
+            $("#animation").addClass('txt');
         });</script>
 </body>
 
