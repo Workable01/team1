@@ -174,8 +174,8 @@ body {
   -webkit-box-shadow: 5px 5px 40px -20px darkslategrey;
           box-shadow: 5px 5px 40px -20px darkslategrey;
   top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+  -webkit-transform: translateY(-50%) translateX(0);
+          transform: translateY(-50%) translateX(0);
 }
 
 .photos img {
@@ -194,8 +194,8 @@ body {
 }
 
 .section.active .photos-left {
-  -webkit-animation: come-left 1s ease-in-out;
-          animation: come-left 1s ease-in-out;
+  -webkit-animation: come-left 1s ease-out;
+          animation: come-left 1s ease-out;
 }
 
 .section.active .photos-right {
@@ -270,49 +270,61 @@ body {
 
 @-webkit-keyframes come-left {
   0% {
-    left: -40vw;
+    -webkit-transform: translateY(-50%) translateX(-50vw);
+            transform: translateY(-50%) translateX(-50vw);
   }
-  70% {
-    left: 20vw;
+  60% {
+    -webkit-transform: translateY(-50%) translateX(3vw);
+            transform: translateY(-50%) translateX(3vw);
   }
   100% {
-    left: 15vw;
+    -webkit-transform: translateY(-50%) translateX(0);
+            transform: translateY(-50%) translateX(0);
   }
 }
 
 @keyframes come-left {
   0% {
-    left: -40vw;
+    -webkit-transform: translateY(-50%) translateX(-50vw);
+            transform: translateY(-50%) translateX(-50vw);
   }
-  70% {
-    left: 20vw;
+  60% {
+    -webkit-transform: translateY(-50%) translateX(3vw);
+            transform: translateY(-50%) translateX(3vw);
   }
   100% {
-    left: 15vw;
+    -webkit-transform: translateY(-50%) translateX(0);
+            transform: translateY(-50%) translateX(0);
   }
 }
 
 @-webkit-keyframes come-right {
   0% {
-    right: -40vw;
+    -webkit-transform: translateY(-50%) translateX(50vw);
+            transform: translateY(-50%) translateX(50vw);
   }
-  70% {
-    right: 20vw;
+  60% {
+    -webkit-transform: translateY(-50%) translateX(-3vw);
+            transform: translateY(-50%) translateX(-3vw);
   }
   100% {
-    right: 15vw;
+    -webkit-transform: translateY(-50%) translateX(0);
+            transform: translateY(-50%) translateX(0);
   }
 }
 
 @keyframes come-right {
   0% {
-    right: -40vw;
+    -webkit-transform: translateY(-50%) translateX(50vw);
+            transform: translateY(-50%) translateX(50vw);
   }
-  70% {
-    right: 20vw;
+  60% {
+    -webkit-transform: translateY(-50%) translateX(-3vw);
+            transform: translateY(-50%) translateX(-3vw);
   }
   100% {
-    right: 15vw;
+    -webkit-transform: translateY(-50%) translateX(0);
+            transform: translateY(-50%) translateX(0);
   }
 }
 
