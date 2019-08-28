@@ -27,89 +27,89 @@ body {
   overflow: hidden;
 }
 .profile-card {
-    position: relative;
-    max-width: 440px;
-    width: 100%;
-    height: 570px;
-    padding: 30px;
-    margin: auto;
-    box-shadow: 5px 5px 40px -20px darkslategrey;
-    color: black;
-    background: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    h1 {
-      font-size: 38px;
-      color: royalblue;
-      padding: 15px 0px;
-      font-weight: 300;
-      padding-top: 30px;
-      b {
-        font-weight: 700;
-      }
-    }
-  
-    &__photo {
-      display: block;
-      position: relative;
-      img.picture {
-        width: 220px;
-        height: 220px;
-        border-radius: 50%;
-        border: 4px solid royalblue;
-        object-fit: cover;
-      }
-      .flag {
-        position: absolute;
-        height: 85px;
-        width: 85px;
-        left: -7px;
-        bottom: -7px;
-        border-radius: 50%;
-        overflow: hidden;
-        background-position-x: left;
-        -o-object-fit: cover;
-        object-fit: cover;
-      }
-    }
-    &__content {
-      padding: 15px 0;
-      background: white;
-      color: #333641;
-      text-align: justify;
-      line-height: 1.4em;
-    }
-    &__social {
-      display: flex;
-      width: 100%;
-      justify-content: flex-end;
-      position: absolute;
-      bottom: 30px;
-      right: 30px;
-      img {
-        width: 30px;
-        height: 30px;
-        margin-left: 15px;
-      }
-    }
-    .at {
-      font-size: 20px;
-      color: #333641;
-      position: absolute;
-      left: 30px;
-      bottom: 37px;
-      z-index: 1;
-    }
-    hr {
-      width: 100%;
-    }
-    .estorfont {
-      height: 70px;
-      display: block;
-      margin: 20px 0 10px 0;
+  position: relative;
+  max-width: 440px;
+  width: 100%;
+  height: 570px;
+  padding: 30px;
+  margin: auto;
+  box-shadow: 5px 5px 40px -20px darkslategrey;
+  color: black;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h1 {
+    font-size: 38px;
+    color: royalblue;
+    padding: 15px 0px;
+    font-weight: 300;
+    padding-top: 30px;
+    b {
+      font-weight: 700;
     }
   }
+
+  &__photo {
+    display: block;
+    position: relative;
+    img.picture {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 4px solid royalblue;
+      object-fit: cover;
+    }
+    .flag {
+      position: absolute;
+      height: 85px;
+      width: 85px;
+      left: -7px;
+      bottom: -7px;
+      border-radius: 50%;
+      overflow: hidden;
+      background-position-x: left;
+      -o-object-fit: cover;
+      object-fit: cover;
+    }
+  }
+  &__content {
+    padding: 15px 0;
+    background: white;
+    color: #333641;
+    text-align: justify;
+    line-height: 1.4em;
+  }
+  &__social {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    img {
+      width: 30px;
+      height: 30px;
+      margin-left: 15px;
+    }
+  }
+  .at {
+    font-size: 20px;
+    color: #333641;
+    position: absolute;
+    left: 30px;
+    bottom: 37px;
+    z-index: 1;
+  }
+  hr {
+    width: 100%;
+  }
+  .estorfont {
+    height: 70px;
+    display: block;
+    margin: 20px 0 10px 0;
+  }
+}
 .section {
   position: relative;
 }
@@ -128,8 +128,8 @@ body {
   background: ghostwhite !important;
 }
 .section-code {
-    background-image: url('./images/code.png');
-    background-size: cover;
+  background-image: url("./images/code.png");
+  background-size: cover;
 }
 .photos {
   height: auto;
@@ -206,16 +206,15 @@ body {
   }
 }
 @keyframes come-right {
-    0% {
-        transform: translateY(-50%) translateX(+50vw);
-    }
-    60% {
+  0% {
+    transform: translateY(-50%) translateX(+50vw);
+  }
+  60% {
     transform: translateY(-50%) translateX(-3vw);
-    }
-    100% {
+  }
+  100% {
     transform: translateY(-50%) translateX(0);
-    }
-
+  }
 }
 #fp-nav {
   bottom: 30px !important;
@@ -322,5 +321,5 @@ body {
   color: #333;
 }
 .grr {
-    background: white;
+  background: white;
 }
