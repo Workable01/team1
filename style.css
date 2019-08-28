@@ -11,7 +11,7 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: lighter;
 }
 
@@ -22,36 +22,9 @@ body {
   place-content: center;
   height: 100vh;
   width: 100%;
-  background: -webkit-gradient(linear, left top, left bottom, from(#1488CC), to(#2B32B2));
-  background: linear-gradient(#1488CC, #2B32B2);
+  background: -webkit-gradient(linear, left top, left bottom, from(#1488cc), to(#2b32b2));
+  background: linear-gradient(#1488cc, #2b32b2);
   overflow: hidden;
-}
-
-span {
-  color: white;
-  font-size: 150px;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-
-.section {
-  position: relative;
-}
-
-.section-technologies__wrapper {
-  color: #fff;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-flow: row nowrap;
-          flex-flow: row nowrap;
-  font-size: 72px;
-  height: 100%;
-}
-
-.section-home {
-  background: ghostwhite !important;
 }
 
 .profile-card {
@@ -162,6 +135,32 @@ span {
   margin: 20px 0 10px 0;
 }
 
+.section {
+  position: relative;
+}
+
+.section-technologies__wrapper {
+  color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  font-size: 72px;
+  height: 100%;
+}
+
+.section-home {
+  background: ghostwhite !important;
+}
+
+.section-code {
+  background-image: url("./images/code.png");
+  background-size: cover;
+}
+
 .photos {
   height: auto;
   position: absolute;
@@ -208,8 +207,8 @@ span {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-image: -webkit-gradient(linear, left top, right top, from(#900C3E), color-stop(#FF5733), color-stop(#571845), color-stop(#FFC300), to(#900C3E));
-  background-image: linear-gradient(to right, #900C3E, #FF5733, #571845, #FFC300, #900C3E);
+  background-image: -webkit-gradient(linear, left top, right top, from(#900c3e), color-stop(#ff5733), color-stop(#571845), color-stop(#ffc300), to(#900c3e));
+  background-image: linear-gradient(to right, #900c3e, #ff5733, #571845, #ffc300, #900c3e);
   background-size: 600%;
   background-position: 0 0;
   display: -webkit-box;
