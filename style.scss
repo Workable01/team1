@@ -162,7 +162,6 @@ body {
     animation: come-right 1s ease-in-out;
   }
 }
-
 .wrapper {
   align-items: center;
   background-image: linear-gradient(to right, $pp-blue, $pp-ltblue, $pp-purple, $sp-yellow, $pp-blue);
@@ -175,7 +174,6 @@ body {
   animation-iteration-count: infinite;
   animation-name: gradients;
 }
-
 @keyframes gradients {
   0% {
     background-position: 0 0;
@@ -251,7 +249,6 @@ body {
   }
   @return $val;
 }
-
 .txt {
   text-align: center;
   font-family: netflix;
@@ -322,4 +319,7 @@ body {
 }
 .ion-social-javascript {
   color: #333;
+}
+.grr {
+    background: white;
 }
