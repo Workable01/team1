@@ -1,13 +1,13 @@
+@font-face {
+  font-family: netflix;
+  src: url(bebas-neue.ttf);
+}
+
 * {
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-}
-
-@font-face {
-  font-family: netflix;
-  src: url(bebas-neue.ttf);
 }
 
 body {
@@ -37,13 +37,27 @@ span {
   position: relative;
 }
 
+.section-technologies__wrapper {
+  color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  font-size: 72px;
+  height: 100%;
+}
+
 .section-home {
   background: ghostwhite !important;
 }
 
 .profile-card {
   position: relative;
-  width: 440px;
+  max-width: 440px;
+  width: 100%;
   height: 570px;
   padding: 30px;
   margin: auto;
@@ -132,6 +146,20 @@ span {
 .profile-card .at {
   font-size: 20px;
   color: #333641;
+  position: absolute;
+  left: 30px;
+  bottom: 37px;
+  z-index: 1;
+}
+
+.profile-card hr {
+  width: 100%;
+}
+
+.profile-card .estorfont {
+  height: 70px;
+  display: block;
+  margin: 20px 0 10px 0;
 }
 
 .photos {
@@ -159,11 +187,11 @@ span {
 }
 
 .photos-left {
-  left: 100px;
+  left: 15vw;
 }
 
 .photos-right {
-  right: 100px;
+  right: 15vw;
 }
 
 .section.active .photos-left {
@@ -180,8 +208,8 @@ span {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-image: -webkit-gradient(linear, left top, right top, from(#054f7d), color-stop(#00a7cf), color-stop(#efe348), color-stop(#861a54), to(#054f7d));
-  background-image: linear-gradient(to right, #054f7d, #00a7cf, #efe348, #861a54, #054f7d);
+  background-image: -webkit-gradient(linear, left top, right top, from(#900C3E), color-stop(#FF5733), color-stop(#571845), color-stop(#FFC300), to(#900C3E));
+  background-image: linear-gradient(to right, #900C3E, #FF5733, #571845, #FFC300, #900C3E);
   background-size: 600%;
   background-position: 0 0;
   display: -webkit-box;
@@ -243,49 +271,49 @@ span {
 
 @-webkit-keyframes come-left {
   0% {
-    left: -400px;
+    left: -40vw;
   }
   70% {
-    left: 150px;
+    left: 20vw;
   }
   100% {
-    left: 100px;
+    left: 15vw;
   }
 }
 
 @keyframes come-left {
   0% {
-    left: -400px;
+    left: -40vw;
   }
   70% {
-    left: 150px;
+    left: 20vw;
   }
   100% {
-    left: 100px;
+    left: 15vw;
   }
 }
 
 @-webkit-keyframes come-right {
   0% {
-    right: -400px;
+    right: -40vw;
   }
   70% {
-    right: 150px;
+    right: 20vw;
   }
   100% {
-    right: 100px;
+    right: 15vw;
   }
 }
 
 @keyframes come-right {
   0% {
-    right: -400px;
+    right: -40vw;
   }
   70% {
-    right: 150px;
+    right: 20vw;
   }
   100% {
-    right: 100px;
+    right: 15vw;
   }
 }
 
@@ -403,5 +431,48 @@ span {
   100% {
     opacity: 1;
   }
+}
+
+.panel {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.html {
+  background-color: #e54d26;
+}
+
+.css {
+  background-color: #0171bb;
+}
+
+.js {
+  background-color: #f1da4e;
+}
+
+.sass {
+  background-color: #cd669a;
+}
+
+.github {
+  background-color: #0f6cb1;
+}
+
+.codepen {
+  background-color: #333;
+}
+
+.ion-social-javascript {
+  color: #333;
 }
 /*# sourceMappingURL=style.css.map */
