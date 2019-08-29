@@ -153,7 +153,7 @@ body {
 }
 
 .section-home {
-  background: ghostwhite !important;
+  background: white !important;
 }
 
 .section-code {
@@ -328,17 +328,14 @@ body {
   }
 }
 
-#fp-nav {
+/*#fp-nav {
   bottom: 30px !important;
   top: unset !important;
-  -webkit-transform: translateX(-50%) rotate(-90deg);
-          transform: translateX(-50%) rotate(-90deg);
-  -webkit-transform-origin: center;
-          transform-origin: center;
+  transform: translateX(-50%) rotate(-90deg);
+  transform-origin: center;
   left: 50% !important;
   right: unset !important;
-}
-
+}*/
 .no-js #loader {
   display: none;
 }
@@ -370,6 +367,26 @@ body {
   outline: none;
   white-space: nowrap;
   color: #e90418;
+}
+
+.greetings {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  bottom: 270px;
+}
+
+.greetings img {
+  height: 70px;
+  margin: 0 15px;
 }
 
 @-webkit-keyframes netflix_style {
@@ -489,5 +506,83 @@ body {
 
 .grr {
   background: white;
+}
+
+.gr-cecilie {
+  opacity: 0;
+  -webkit-animation: opacityname 1s linear;
+          animation: opacityname 1s linear;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-delay: 3s;
+          animation-delay: 3s;
+}
+
+@-webkit-keyframes opacityname {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes opacityname {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.gr-kyle {
+  opacity: 0;
+  -webkit-animation: opacityname 1s linear;
+          animation: opacityname 1s linear;
+  -webkit-animation-delay: 4s;
+          animation-delay: 4s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.gr-estor {
+  opacity: 0;
+  -webkit-animation: opacityname 1s linear;
+          animation: opacityname 1s linear;
+  -webkit-animation-delay: 5s;
+          animation-delay: 5s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.gr-tamas {
+  opacity: 0;
+  -webkit-animation: opacityname 1s linear;
+          animation: opacityname 1s linear;
+  -webkit-animation-delay: 6s;
+          animation-delay: 6s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.gr-marcelo {
+  opacity: 0;
+  -webkit-animation: opacityname 1s linear;
+          animation: opacityname 1s linear;
+  -webkit-animation-delay: 7s;
+          animation-delay: 7s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.gr-adam {
+  opacity: 0;
+  -webkit-animation: opacityname 1s linear;
+          animation: opacityname 1s linear;
+  -webkit-animation-delay: 8s;
+          animation-delay: 8s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
 }
 /*# sourceMappingURL=style.css.map */

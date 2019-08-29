@@ -125,7 +125,7 @@ body {
 }
 
 .section-home {
-  background: ghostwhite !important;
+  background: white !important;
 }
 .section-code {
   background-image: url("./images/code.png");
@@ -216,14 +216,14 @@ body {
     transform: translateY(-50%) translateX(0);
   }
 }
-#fp-nav {
+/*#fp-nav {
   bottom: 30px !important;
   top: unset !important;
   transform: translateX(-50%) rotate(-90deg);
   transform-origin: center;
   left: 50% !important;
   right: unset !important;
-}
+}*/
 .no-js #loader {
   display: none;
 }
@@ -258,6 +258,18 @@ body {
   outline: none;
   white-space: nowrap;
   color: #e90418;
+}
+.greetings {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+    bottom: 270px;
+  img {
+    height: 70px;
+    margin: 0 15px;
+  }
 }
 @keyframes netflix_style {
   0% {
@@ -321,4 +333,48 @@ body {
 }
 .grr {
   background: white;
+}
+.gr-cecilie {
+  opacity: 0;
+  animation: opacityname 1s linear;
+  animation-fill-mode: forwards;
+  animation-delay: 3s;
+}
+@keyframes opacityname {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.gr-kyle {
+  opacity: 0;
+  animation: opacityname 1s linear;
+  animation-delay: 4s;
+  animation-fill-mode: forwards;
+}
+.gr-estor {
+  opacity: 0;
+  animation: opacityname 1s linear;
+  animation-delay: 5s;
+  animation-fill-mode: forwards;
+}
+.gr-tamas {
+  opacity: 0;
+  animation: opacityname 1s linear;
+  animation-delay: 6s;
+  animation-fill-mode: forwards;
+}
+.gr-marcelo {
+  opacity: 0;
+  animation: opacityname 1s linear;
+  animation-delay: 7s;
+  animation-fill-mode: forwards;
+}
+.gr-adam {
+  opacity: 0;
+  animation: opacityname 1s linear;
+  animation-delay: 8s;
+  animation-fill-mode: forwards;
 }
