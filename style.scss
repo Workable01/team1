@@ -334,12 +334,6 @@ body {
 .grr {
   background: white;
 }
-.gr-cecilie {
-  opacity: 0;
-  animation: opacityname 1s linear;
-  animation-fill-mode: forwards;
-  animation-delay: 3s;
-}
 @keyframes opacityname {
   from {
     opacity: 0;
@@ -348,33 +342,53 @@ body {
     opacity: 1;
   }
 }
+.ready {
+  .gr-cecilie {
+    animation: opacityname 1s linear;
+  animation-fill-mode: forwards;
+    animation-delay: 3s;
+  }
+  .gr-kyle {
+    animation: opacityname 1s linear;
+  animation-fill-mode: forwards;
+    animation-delay: 4s;
+  }
+  .gr-estor {
+    animation: opacityname 1s linear;
+  animation-fill-mode: forwards;
+    animation-delay: 5s;
+  }
+  .gr-tamas {
+    animation: opacityname 1s linear;
+  animation-fill-mode: forwards;
+    animation-delay: 6s;
+  }
+  .gr-marcelo {
+    animation: opacityname 1s linear;
+  animation-fill-mode: forwards;
+    animation-delay: 7s;
+  }
+  .gr-adam {
+    animation: opacityname 1s linear;
+  animation-fill-mode: forwards;
+    animation-delay: 8s;
+  }
+}
+.gr-cecilie {
+  opacity: 0;
+}
 .gr-kyle {
   opacity: 0;
-  animation: opacityname 1s linear;
-  animation-delay: 4s;
-  animation-fill-mode: forwards;
 }
 .gr-estor {
   opacity: 0;
-  animation: opacityname 1s linear;
-  animation-delay: 5s;
-  animation-fill-mode: forwards;
 }
 .gr-tamas {
   opacity: 0;
-  animation: opacityname 1s linear;
-  animation-delay: 6s;
-  animation-fill-mode: forwards;
 }
 .gr-marcelo {
   opacity: 0;
-  animation: opacityname 1s linear;
-  animation-delay: 7s;
-  animation-fill-mode: forwards;
 }
 .gr-adam {
   opacity: 0;
-  animation: opacityname 1s linear;
-  animation-delay: 8s;
-  animation-fill-mode: forwards;
 }

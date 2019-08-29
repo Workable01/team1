@@ -508,16 +508,6 @@ body {
   background: white;
 }
 
-.gr-cecilie {
-  opacity: 0;
-  -webkit-animation: opacityname 1s linear;
-          animation: opacityname 1s linear;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
-  -webkit-animation-delay: 3s;
-          animation-delay: 3s;
-}
-
 @-webkit-keyframes opacityname {
   from {
     opacity: 0;
@@ -536,53 +526,81 @@ body {
   }
 }
 
-.gr-kyle {
-  opacity: 0;
+.ready .gr-cecilie {
   -webkit-animation: opacityname 1s linear;
           animation: opacityname 1s linear;
-  -webkit-animation-delay: 4s;
-          animation-delay: 4s;
   -webkit-animation-fill-mode: forwards;
           animation-fill-mode: forwards;
+  -webkit-animation-delay: 3s;
+          animation-delay: 3s;
+}
+
+.ready .gr-kyle {
+  -webkit-animation: opacityname 1s linear;
+          animation: opacityname 1s linear;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-delay: 4s;
+          animation-delay: 4s;
+}
+
+.ready .gr-estor {
+  -webkit-animation: opacityname 1s linear;
+          animation: opacityname 1s linear;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-delay: 5s;
+          animation-delay: 5s;
+}
+
+.ready .gr-tamas {
+  -webkit-animation: opacityname 1s linear;
+          animation: opacityname 1s linear;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-delay: 6s;
+          animation-delay: 6s;
+}
+
+.ready .gr-marcelo {
+  -webkit-animation: opacityname 1s linear;
+          animation: opacityname 1s linear;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-delay: 7s;
+          animation-delay: 7s;
+}
+
+.ready .gr-adam {
+  -webkit-animation: opacityname 1s linear;
+          animation: opacityname 1s linear;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-delay: 8s;
+          animation-delay: 8s;
+}
+
+.gr-cecilie {
+  opacity: 0;
+}
+
+.gr-kyle {
+  opacity: 0;
 }
 
 .gr-estor {
   opacity: 0;
-  -webkit-animation: opacityname 1s linear;
-          animation: opacityname 1s linear;
-  -webkit-animation-delay: 5s;
-          animation-delay: 5s;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
 }
 
 .gr-tamas {
   opacity: 0;
-  -webkit-animation: opacityname 1s linear;
-          animation: opacityname 1s linear;
-  -webkit-animation-delay: 6s;
-          animation-delay: 6s;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
 }
 
 .gr-marcelo {
   opacity: 0;
-  -webkit-animation: opacityname 1s linear;
-          animation: opacityname 1s linear;
-  -webkit-animation-delay: 7s;
-          animation-delay: 7s;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
 }
 
 .gr-adam {
   opacity: 0;
-  -webkit-animation: opacityname 1s linear;
-          animation: opacityname 1s linear;
-  -webkit-animation-delay: 8s;
-          animation-delay: 8s;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
 }
 /*# sourceMappingURL=style.css.map */
