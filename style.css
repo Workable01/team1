@@ -365,8 +365,8 @@ body {
   font-family: netflix;
   font-size: 12vmin;
   font-weight: 700;
-  -webkit-animation: netflix_style 3.5s 1;
-          animation: netflix_style 3.5s 1;
+  -webkit-animation: netflix_style 4s 1;
+          animation: netflix_style 4s 1;
   outline: none;
   white-space: nowrap;
   color: #e90418;
