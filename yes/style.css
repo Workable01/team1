@@ -1,0 +1,325 @@
+header {
+    position: fixed;
+}
+
+nav {
+    display: block;
+    text-align: center;
+    background: black;
+    width: 100%;
+    list-style-type: none;
+    margin-top: -8px;
+    padding: 17px;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav li {
+    margin-bottom: 5px;
+    margin-right: 50px;
+    padding-top: 4px;
+    float: right;
+
+}
+
+nav a {
+    color: white;
+    display: block;
+    text-decoration: none;
+    font-size: 17px;
+    text-transform: uppercase;
+    font-family: Montserrat, sans-serif;
+}
+
+nav a:hover {
+    transform: scale(1.1);
+}
+
+.logo {
+    float: left;
+    width: auto;
+    height: 30px;
+    position: relative;
+}
+.before {position: relative;}
+.before::before {
+    content: 'Adam';
+    position: absolute;
+    display: block;
+    left: 34px;
+    top: 6px;
+    z-index: 12312;
+    color: white;
+    text-transform: uppercase;
+    background: black;
+}
+.active {
+    color: #F0AE00;
+}
+
+@media screen and (max-width: 600px) {
+    .logo {
+        position: relative;
+    }
+
+    ul.topnav li.right,
+    ul.topnav li {
+        float: none;
+    }
+
+    .bauhausarticle {
+        max-width: 400px;
+
+    }
+
+    .responsive {
+        margin-top: 160px;
+    }
+
+    .highlighttext {
+        max-width: 400px;
+    }
+
+    .moodboard {
+        width: 90%;
+        height: auto;
+    }
+
+    .nadpis {
+        max-width: 300px;
+    }
+}
+
+h1 {
+    text-align: center;
+    margin-top: 300px;
+    margin-left: 100px;
+    font-family: Montserrat, sans-serif;
+    font-size: 20px;
+    max-width: 300px;
+    color: white;
+
+}
+
+.walter {
+    margin-top: 0px;
+}
+
+.frontground {
+    background-image: url(Images/building.jpg);
+    background-color: #313131;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: auto;
+    position: inherit;
+}
+
+body {
+    background-color: #313131;
+}
+
+.button {
+    background-color: #F0AE00;
+    border: none;
+    color: white;
+    padding: 16px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: Montserrat, sans-serif;
+    font-size: 18px;
+    margin: 50px 170px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border: 2px solid #F0AE00;
+}
+
+.button1:hover {
+    background-color: black;
+    border: 2px solid #F0AE00;
+    color: #F0AE00;
+}
+
+.responsive {
+    width: 100%;
+    height: auto;
+    position: inherit;
+}
+
+
+p {
+    text-align: justify;
+    max-width: 500px;
+    margin: auto;
+    color: white;
+    font-family: Montserrat, sans-serif;
+    font-size: 18px;
+    margin-top: 50px;
+}
+
+.highlighttext {
+    color: #F0AE00;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.moodboard {
+    max-width: 700px;
+    padding: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+h2 {
+    max-width: 500px;
+    margin: auto;
+    color: #F0AE00;
+    font-family: Montserrat, sans-serif;
+    font-size: 21px;
+    margin-top: 20px;
+    margin-bottom: -40px;
+    display: block;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial;
+}
+
+.header {
+    text-align: center;
+    padding: 32px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+}
+
+.column {
+    flex: 25%;
+    max-width: 25%;
+    padding: 0 4px;
+}
+
+.column img {
+    margin-top: 8px;
+    vertical-align: middle;
+}
+
+
+@media (max-width: 800px) {
+    .column {
+        flex: 50%;
+        max-width: 50%;
+    }
+}
+
+
+@media (max-width: 600px) {
+    .column {
+        flex: 100%;
+        max-width: 100%;
+    }
+}
+
+.profile {
+    max-width: 500px;
+    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    display: block;
+}
+
+@media (max-width: 600px) {
+    .profile {
+        width: 65%;
+        height: auto;
+        margin-top: 200px;
+        display: block;
+    }
+}
+
+.footer {
+    display: block;
+    margin-top: 100px;
+    padding: 30px;
+}
+
+div.gallery {
+    border: 10px solid #ffffff;
+}
+
+div.gallery:hover {
+    border: 6px solid #F0AE00;
+}
+
+div.gallery img {
+    width: 100%;
+    height: auto;
+}
+
+div.desc {
+    padding: 15px;
+    text-align: center;
+    background-color: white;
+    font-family: Montserrat, sans-serif;
+    font-size: 20px;
+}
+
+.responsive1 {
+    padding: 0 6px;
+    float: left;
+    width: 24.99999%;
+}
+
+@media only screen and (max-width: 700px) {
+    .responsive1 {
+        width: 49.99999%;
+        margin: 6px 0;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .responsive1 {
+        width: 50%;
+        display: block;
+        margin-top: 200px;
+    }
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.montserrat {
+    display: block;
+    max-width: 600px;
+    margin: auto;
+    padding-top: 80px;
+}
+
+@media (max-width: 600px) {
+    .montserrat {
+        width: 95%;
+        height: auto;
+    }
+}
