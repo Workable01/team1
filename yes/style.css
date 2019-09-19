@@ -116,13 +116,15 @@ h1 {
     background-image: url(Images/building.jpg);
     background-color: #313131;
     background-repeat: no-repeat;
+    background-position: right;
     background-size: cover;
-    height: auto;
+    height: 100vh;
     position: inherit;
 }
 
 body {
     background-color: #313131;
+    overflow: hidden;
 }
 
 .button {
