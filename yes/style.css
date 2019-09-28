@@ -1,65 +1,78 @@
-header {
-    position: fixed;
-}
-
-nav {
-    display: block;
-    text-align: center;
-    background: black;
-    width: 100%;
+* {
+    box-sizing: border-box;
     list-style-type: none;
-    margin-top: -8px;
-    padding: 17px;
-    overflow: hidden;
-    position: fixed;
-    top: 0;
-}
-
-nav ul {
+    text-decoration: none;
     margin: 0;
     padding: 0;
-    list-style: none;
+}
+body {
+    padding: 60px 0 0 0;
+}
+body {
+    background-color: #313131;
 }
 
+header {
+    position: fixed;
+    background: black;
+    width: 100%;
+    padding:0 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    top: 0;
+    height: 60px;
+}
 nav li {
-    margin-bottom: 5px;
-    margin-right: 50px;
-    padding-top: 4px;
-    float: right;
-
+    margin-right: 25px;
+}
+@media screen and (max-width: 600px) {
+    body {
+        padding: 0;
+    }
+    .topnav {
+        flex-direction: column;
+        align-items: center;
+    
+    }
+    header {
+        flex-direction: column;
+        height: auto;  
+        padding: 25px 0; 
+        position: static; 
+    }
+    nav li {
+        margin-right: 0px;
+    }
+    
+}
+.topnav {
+display: flex;
 }
 
+nav li:last-child {
+    margin: 0
+}
 nav a {
-    color: white;
     display: block;
+    color: white;
     text-decoration: none;
     font-size: 17px;
     text-transform: uppercase;
     font-family: Montserrat, sans-serif;
+    transition: all 0.3s;
 }
 
 nav a:hover {
-    transform: scale(1.1);
+    transform: scale(1.2)
 }
 
 .logo {
-    float: left;
     width: auto;
     height: 30px;
-    position: relative;
 }
-.before {position: relative;}
-.before::before {
-    content: 'Adam';
-    position: absolute;
-    display: block;
-    left: 34px;
-    top: 6px;
-    z-index: 12312;
-    color: white;
-    text-transform: uppercase;
-    background: black;
-}
+
 .active {
     color: #F0AE00;
 }
@@ -67,11 +80,7 @@ nav a:hover {
 @media screen and (max-width: 600px) {
     .logo {
         position: relative;
-    }
-
-    ul.topnav li.right,
-    ul.topnav li {
-        float: none;
+        margin-bottom: 25px;
     }
 
     .bauhausarticle {
@@ -96,38 +105,44 @@ nav a:hover {
         max-width: 300px;
     }
 }
-
+.container {
+    padding: 0 50px;
+}
 h1 {
     text-align: center;
-    margin-top: 300px;
-    margin-left: 100px;
     font-family: Montserrat, sans-serif;
     font-size: 20px;
-    max-width: 300px;
     color: white;
-
+    line-height: 27px;
 }
 
-.walter {
-    margin-top: 0px;
-}
-
-.frontground {
-    
+.foreground {
+    background-image: url(./Images/building.jpg);
     background-color: #313131;
     background-repeat: no-repeat;
-    background-position: right;
     background-size: cover;
     height: 100vh;
-    position: inherit;
+    background-position: right; 
+
 }
 
-body {
-    background-color: #313131;
-    overflow: hidden;
+.hero {
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 200px;
 }
-
+@media only screen and (max-width: 700px) {
+    .hero {
+        padding: 0 20px;
+        max-width: unset;
+        margin: 200px 0;
+    }
+}
 .button {
+    display: inline-block;
     background-color: #F0AE00;
     border: none;
     color: white;
@@ -137,16 +152,17 @@ body {
     display: inline-block;
     font-family: Montserrat, sans-serif;
     font-size: 18px;
-    margin: 50px 170px;
+    margin: auto;
+    margin-top: 40px;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     cursor: pointer;
     border: 2px solid #F0AE00;
+    user-select: none;
 }
 
-.button1:hover {
+.button:hover {
     background-color: black;
-    border: 2px solid #F0AE00;
     color: #F0AE00;
 }
 
@@ -241,21 +257,17 @@ body {
 }
 
 .profile {
-    max-width: 500px;
+    max-width: 900px;
+    width: 100%;
     margin: auto;
-    margin-left: auto;
-    margin-right: auto;
     margin-top: 100px;
-    display: block;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 50px;
+    
 }
-
-@media (max-width: 600px) {
-    .profile {
-        width: 65%;
-        height: auto;
-        margin-top: 200px;
-        display: block;
-    }
+.profile img {
+    max-width: 100%;
 }
 
 .footer {
@@ -263,21 +275,27 @@ body {
     margin-top: 100px;
     padding: 30px;
 }
-
-div.gallery {
-    border: 10px solid #ffffff;
+.footer a { display: inline-block; transition: all .3s;}
+.footer a:hover {
+    transform: translateY(-10px);
 }
 
-div.gallery:hover {
+.gallery {
+    border: 10px solid #ffffff;
+    transition: all 0.3s;
+}
+
+.gallery:hover {
     border: 6px solid #F0AE00;
 }
 
-div.gallery img {
+.gallery img {
     width: 100%;
     height: auto;
+    display: block;
 }
 
-div.desc {
+.desc {
     padding: 15px;
     text-align: center;
     background-color: white;
@@ -288,12 +306,12 @@ div.desc {
 .responsive1 {
     padding: 0 6px;
     float: left;
-    width: 24.99999%;
+    width: 25%;
 }
 
 @media only screen and (max-width: 700px) {
     .responsive1 {
-        width: 49.99999%;
+        width: 50%;
         margin: 6px 0;
     }
 }
@@ -302,15 +320,9 @@ div.desc {
     .responsive1 {
         width: 50%;
         display: block;
-        margin-top: 200px;
     }
 }
 
-.clearfix:after {
-    content: "";
-    display: table;
-    clear: both;
-}
 
 .montserrat {
     display: block;
@@ -324,4 +336,14 @@ div.desc {
         width: 95%;
         height: auto;
     }
+}
+
+.logos {
+ display: grid;
+ grid-gap: 15px;
+ padding: 15px;
+ grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))
+}
+.logos img {
+    max-width: 100%;
 }
