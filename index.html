@@ -33,7 +33,6 @@ import csv
 import colorama
 from pprint import pprint as pp
 
-&#34;&#34;&#34;-----CLASS FOR PARSING-----&#34;&#34;&#34;
 
 
 class Parser:
@@ -68,7 +67,7 @@ class Parser:
             print(colored(&#39;File doesn\&#39;t exist&#39;, &#39;red&#39;))
             return None
 
-    def getData(self, separator):
+    def get_data(self, separator):
         &#34;&#34;&#34;Method for reading csv contents and parsing it into a list of
             dictionaries.
 
@@ -117,9 +116,6 @@ class Parser:
         return data
 
 
-&#34;&#34;&#34;-----UTILITY FUNCTIONS-----&#34;&#34;&#34;
-
-
 def check_data(func):
     &#34;&#34;&#34;Decorator function to check if the data exists before user tries to use functions that require it.&#34;&#34;&#34;
     def inner(*args, **kwargs):
@@ -133,7 +129,7 @@ def check_data(func):
     return inner
 
 
-def filterByCity(city, data):
+def filter_by_city(city, data):
     &#34;&#34;&#34;Filters data by city name.
 
     Args:
@@ -143,22 +139,23 @@ def filterByCity(city, data):
     Returns:
         list: List of ditionaries.
     &#34;&#34;&#34;
+    # filter that compares location using a lambda operator
     return list(filter(lambda x: x[&#39;location&#39;] == city, data))
 
 
-def getDateObject(stringDate):
+def get_date_object(string_date):
     &#34;&#34;&#34;Returns a date object from a string.
 
     Args:
-        stringDate (str): Date in plain string.
+        string_date (str): Date in plain string.
 
     Returns:
         datetime: Object with useful methods for working with date.
     &#34;&#34;&#34;
-    return dt.datetime.strptime(stringDate, &#39;%Y-%m-%d&#39;)
+    return dt.datetime.strptime(string_date, &#39;%Y-%m-%d&#39;)
 
 
-def getAverageFromList(list):
+def get_average_from_list(list):
     &#34;&#34;&#34;Calculates the average from a list.
 
     Args:
@@ -167,11 +164,11 @@ def getAverageFromList(list):
     Returns:
         int: Average of a list.
     &#34;&#34;&#34;
-    # calculate the average by dividing the sum of numbers by quantity of numbers
+    # calculate the average by dividing the sum of numbers by the quantity of numbers
     return sum(list) / len(list)
 
 
-def askUser(path):
+def ask_user(path):
     &#34;&#34;&#34;Prints out a menu and asks for users input accordingly.
 
     Args:
@@ -190,7 +187,7 @@ def askUser(path):
         return res.lower()
 
 
-def getAverageSpeedPerMonths(city, data):
+def get_average_speed_per_months(city, data):
     &#34;&#34;&#34;Calculates average speed per each month in a specified city.
 
     Args:
@@ -201,38 +198,35 @@ def getAverageSpeedPerMonths(city, data):
         dict: {
             &#39;x&#39;: list: Months,
             &#39;y&#39;: list: Average speeds.
-        }
+            }
     &#34;&#34;&#34;
-    downloadSpeeds = []
-    dates = []
-    months = []
-    city = filterByCity(city, data)
-    somethings = {}
+    city = filter_by_city(city, data)
+    months_dict = {}
     for dict in city:
-        tempList = []
-        month = getDateObject(dict[&#39;date&#39;]).month
-        if month in somethings:
-            somethings[month].append(float(dict[&#39;download&#39;]))
+        temp_list = []
+        month = get_date_object(dict[&#39;date&#39;]).month
+        if month in months_dict:
+            months_dict[month].append(float(dict[&#39;download&#39;]))
         else:
-            tempList.append(float(dict[&#39;download&#39;]))
-            somethings[month] = tempList
+            temp_list.append(float(dict[&#39;download&#39;]))
+            months_dict[month] = temp_list
 
-        downloadSpeeds.append(float(dict[&#39;download&#39;]))
-        dates.append(dict[&#39;date&#39;])
+    avg_dict = {}
+    for k, v in months_dict.items():
+        avg_dict[int(k)] = get_average_from_list(v)
 
-    for item in dates:
-        months.append(getDateObject(item).month)
+    items = avg_dict.items()
+    tuples = sorted(items)
+    # asterisk takes the tuples out of the list and spreads them out (positional expansion)
+    # e.g. [1,2,3,4] &gt; 1, 2, 3, 4
+    # zip pairs items from lists together
+    # e.g. [1, 2, 3], [&#34;a&#34;, &#34;b&#34;, &#34;c&#34;] &gt; [[1, &#34;a&#34;], [2, &#34;b&#34;], [3, &#34;c&#34;]]
+    x, y = zip(*tuples)
 
-    avgDict = {}
-    for k, v in somethings.items():
-        avgDict[int(k)] = getAverageFromList(v)
-
-    lists = sorted(avgDict.items())
-    x, y = zip(*lists)
     return {&#39;x&#39;: x, &#39;y&#39;: y}
 
 
-def getSpeedsPerMonth(selected_month, data):
+def get_speeds_per_month(selected_month, data):
     &#34;&#34;&#34;Returns all the speeds for a selected month.
 
     Args:
@@ -248,14 +242,14 @@ def getSpeedsPerMonth(selected_month, data):
     month_number = str(dt.datetime.strptime(selected_month, &#39;%B&#39;).month)
     for dict in data:
         # formats a date string into a month number
-        temp_month = getDateObject(dict[&#39;date&#39;]).strftime(&#34;%m&#34;).lstrip(&#39;0&#39;)
+        temp_month = get_date_object(dict[&#39;date&#39;]).strftime(&#34;%m&#34;).lstrip(&#39;0&#39;)
         if month_number == temp_month:
             speeds.append(float(dict[&#39;download&#39;]))
 
     return speeds
 
 
-def getPlotConfig(label_x=&#34;x&#34;, label_y=&#34;y&#34;, ticks=10):
+def get_plot_config(label_x=&#34;x&#34;, label_y=&#34;y&#34;, ticks=10):
     &#34;&#34;&#34;Sets desired plot config.
 
     Args:
@@ -271,39 +265,38 @@ def getPlotConfig(label_x=&#34;x&#34;, label_y=&#34;y&#34;, ticks=10):
     plt.show()
 
 
-def getPlotTheme():
+def get_plot_theme():
     &#34;&#34;&#34;Returns a correct plot style accrording to the state of dark mode.
 
     Returns:
         str: Plot style.
     &#34;&#34;&#34;
-    global darkMode
-    if darkMode:
+    global dark_mode
+    if dark_mode:
         return &#39;dark_background&#39;
     else:
         return &#39;ggplot&#39;
 
 
-def parseData():
+def parse_data():
     &#34;&#34;&#34;Uses Parser class to parse data into a global variable.&#34;&#34;&#34;
     global data
-    data = parser.getData(separator=&#39;,&#39;)
+    data = parser.get_data(separator=&#39;,&#39;)
     input(&#34;Click ENTER to continue...&#34;)
 
-def toggleDarkMode():
+
+def toggle_dark_mode():
     &#34;&#34;&#34;Toggles a dark mode state.&#34;&#34;&#34;
-    global darkMode
-    darkMode ^= True
+    global dark_mode
+    dark_mode ^= True
     print(&#34;Dark mode is:&#34;, end=&#34; &#34;)
-    if darkMode:
+    if dark_mode:
         print(colored(&#34;ON&#34;, &#34;green&#34;))
         print(&#34;Open a graph to see the results.&#34;)
     else:
         print(colored(&#34;OFF&#34;, &#34;red&#34;))
     input(&#34;Click ENTER to continue...&#34;)
 
-
-# -----EXECUTION-----
 
 &#34;&#34;&#34;Makes colored terminal output work on Windows&#34;&#34;&#34;
 colorama.init()
@@ -314,10 +307,10 @@ parser = Parser(&#39;utf8&#39;)
 data = []
 &#34;&#34;&#34;List: Used as a container for the parsed data.&#34;&#34;&#34;
 
-choice = askUser(&#39;menu.txt&#39;)
+choice = ask_user(&#39;menu.txt&#39;)
 &#34;&#34;&#34;String: Getting and storing users input.&#34;&#34;&#34;
 
-darkMode = False
+dark_mode = False
 &#34;&#34;&#34;Boolean: Keeps track if DarkMode is ON or OFF&#34;&#34;&#34;</code></pre>
 </details>
 </section>
@@ -330,7 +323,7 @@ darkMode = False
 <dd>
 <section class="desc"><p>String: Getting and storing users input.</p></section>
 </dd>
-<dt id="project.darkMode"><code class="name">var <span class="ident">darkMode</span></code></dt>
+<dt id="project.dark_mode"><code class="name">var <span class="ident">dark_mode</span></code></dt>
 <dd>
 <section class="desc"><p>Boolean: Keeps track if DarkMode is ON or OFF</p></section>
 </dd>
@@ -347,8 +340,8 @@ darkMode = False
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="project.askUser"><code class="name flex">
-<span>def <span class="ident">askUser</span></span>(<span>path)</span>
+<dt id="project.ask_user"><code class="name flex">
+<span>def <span class="ident">ask_user</span></span>(<span>path)</span>
 </code></dt>
 <dd>
 <section class="desc"><p>Prints out a menu and asks for users input accordingly.</p>
@@ -363,7 +356,7 @@ darkMode = False
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def askUser(path):
+<pre><code class="python">def ask_user(path):
     &#34;&#34;&#34;Prints out a menu and asks for users input accordingly.
 
     Args:
@@ -404,8 +397,8 @@ darkMode = False
     return inner</code></pre>
 </details>
 </dd>
-<dt id="project.filterByCity"><code class="name flex">
-<span>def <span class="ident">filterByCity</span></span>(<span>city, data)</span>
+<dt id="project.filter_by_city"><code class="name flex">
+<span>def <span class="ident">filter_by_city</span></span>(<span>city, data)</span>
 </code></dt>
 <dd>
 <section class="desc"><p>Filters data by city name.</p>
@@ -425,7 +418,7 @@ darkMode = False
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def filterByCity(city, data):
+<pre><code class="python">def filter_by_city(city, data):
     &#34;&#34;&#34;Filters data by city name.
 
     Args:
@@ -435,11 +428,12 @@ darkMode = False
     Returns:
         list: List of ditionaries.
     &#34;&#34;&#34;
+    # filter that compares location using a lambda operator
     return list(filter(lambda x: x[&#39;location&#39;] == city, data))</code></pre>
 </details>
 </dd>
-<dt id="project.getAverageFromList"><code class="name flex">
-<span>def <span class="ident">getAverageFromList</span></span>(<span>list)</span>
+<dt id="project.get_average_from_list"><code class="name flex">
+<span>def <span class="ident">get_average_from_list</span></span>(<span>list)</span>
 </code></dt>
 <dd>
 <section class="desc"><p>Calculates the average from a list.</p>
@@ -457,7 +451,7 @@ darkMode = False
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def getAverageFromList(list):
+<pre><code class="python">def get_average_from_list(list):
     &#34;&#34;&#34;Calculates the average from a list.
 
     Args:
@@ -466,12 +460,12 @@ darkMode = False
     Returns:
         int: Average of a list.
     &#34;&#34;&#34;
-    # calculate the average by dividing the sum of numbers by quantity of numbers
+    # calculate the average by dividing the sum of numbers by the quantity of numbers
     return sum(list) / len(list)</code></pre>
 </details>
 </dd>
-<dt id="project.getAverageSpeedPerMonths"><code class="name flex">
-<span>def <span class="ident">getAverageSpeedPerMonths</span></span>(<span>city, data)</span>
+<dt id="project.get_average_speed_per_months"><code class="name flex">
+<span>def <span class="ident">get_average_speed_per_months</span></span>(<span>city, data)</span>
 </code></dt>
 <dd>
 <section class="desc"><p>Calculates average speed per each month in a specified city.</p>
@@ -487,14 +481,14 @@ darkMode = False
 <dt><strong><code>dict</code></strong></dt>
 <dd>{
 'x': list: Months,
-'y': list: Average speeds.</dd>
-</dl>
-<p>}</p></section>
+'y': list: Average speeds.
+}</dd>
+</dl></section>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def getAverageSpeedPerMonths(city, data):
+<pre><code class="python">def get_average_speed_per_months(city, data):
     &#34;&#34;&#34;Calculates average speed per each month in a specified city.
 
     Args:
@@ -505,45 +499,42 @@ darkMode = False
         dict: {
             &#39;x&#39;: list: Months,
             &#39;y&#39;: list: Average speeds.
-        }
+            }
     &#34;&#34;&#34;
-    downloadSpeeds = []
-    dates = []
-    months = []
-    city = filterByCity(city, data)
-    somethings = {}
+    city = filter_by_city(city, data)
+    months_dict = {}
     for dict in city:
-        tempList = []
-        month = getDateObject(dict[&#39;date&#39;]).month
-        if month in somethings:
-            somethings[month].append(float(dict[&#39;download&#39;]))
+        temp_list = []
+        month = get_date_object(dict[&#39;date&#39;]).month
+        if month in months_dict:
+            months_dict[month].append(float(dict[&#39;download&#39;]))
         else:
-            tempList.append(float(dict[&#39;download&#39;]))
-            somethings[month] = tempList
+            temp_list.append(float(dict[&#39;download&#39;]))
+            months_dict[month] = temp_list
 
-        downloadSpeeds.append(float(dict[&#39;download&#39;]))
-        dates.append(dict[&#39;date&#39;])
+    avg_dict = {}
+    for k, v in months_dict.items():
+        avg_dict[int(k)] = get_average_from_list(v)
 
-    for item in dates:
-        months.append(getDateObject(item).month)
+    items = avg_dict.items()
+    tuples = sorted(items)
+    # asterisk takes the tuples out of the list and spreads them out (positional expansion)
+    # e.g. [1,2,3,4] &gt; 1, 2, 3, 4
+    # zip pairs items from lists together
+    # e.g. [1, 2, 3], [&#34;a&#34;, &#34;b&#34;, &#34;c&#34;] &gt; [[1, &#34;a&#34;], [2, &#34;b&#34;], [3, &#34;c&#34;]]
+    x, y = zip(*tuples)
 
-    avgDict = {}
-    for k, v in somethings.items():
-        avgDict[int(k)] = getAverageFromList(v)
-
-    lists = sorted(avgDict.items())
-    x, y = zip(*lists)
     return {&#39;x&#39;: x, &#39;y&#39;: y}</code></pre>
 </details>
 </dd>
-<dt id="project.getDateObject"><code class="name flex">
-<span>def <span class="ident">getDateObject</span></span>(<span>stringDate)</span>
+<dt id="project.get_date_object"><code class="name flex">
+<span>def <span class="ident">get_date_object</span></span>(<span>string_date)</span>
 </code></dt>
 <dd>
 <section class="desc"><p>Returns a date object from a string.</p>
 <h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>stringDate</code></strong> :&ensp;<code>str</code></dt>
+<dt><strong><code>string_date</code></strong> :&ensp;<code>str</code></dt>
 <dd>Date in plain string.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
@@ -555,20 +546,20 @@ darkMode = False
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def getDateObject(stringDate):
+<pre><code class="python">def get_date_object(string_date):
     &#34;&#34;&#34;Returns a date object from a string.
 
     Args:
-        stringDate (str): Date in plain string.
+        string_date (str): Date in plain string.
 
     Returns:
         datetime: Object with useful methods for working with date.
     &#34;&#34;&#34;
-    return dt.datetime.strptime(stringDate, &#39;%Y-%m-%d&#39;)</code></pre>
+    return dt.datetime.strptime(string_date, &#39;%Y-%m-%d&#39;)</code></pre>
 </details>
 </dd>
-<dt id="project.getPlotConfig"><code class="name flex">
-<span>def <span class="ident">getPlotConfig</span></span>(<span>label_x='x', label_y='y', ticks=10)</span>
+<dt id="project.get_plot_config"><code class="name flex">
+<span>def <span class="ident">get_plot_config</span></span>(<span>label_x='x', label_y='y', ticks=10)</span>
 </code></dt>
 <dd>
 <section class="desc"><p>Sets desired plot config.</p>
@@ -585,7 +576,7 @@ darkMode = False
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def getPlotConfig(label_x=&#34;x&#34;, label_y=&#34;y&#34;, ticks=10):
+<pre><code class="python">def get_plot_config(label_x=&#34;x&#34;, label_y=&#34;y&#34;, ticks=10):
     &#34;&#34;&#34;Sets desired plot config.
 
     Args:
@@ -601,8 +592,8 @@ darkMode = False
     plt.show()</code></pre>
 </details>
 </dd>
-<dt id="project.getPlotTheme"><code class="name flex">
-<span>def <span class="ident">getPlotTheme</span></span>(<span>)</span>
+<dt id="project.get_plot_theme"><code class="name flex">
+<span>def <span class="ident">get_plot_theme</span></span>(<span>)</span>
 </code></dt>
 <dd>
 <section class="desc"><p>Returns a correct plot style accrording to the state of dark mode.</p>
@@ -615,21 +606,21 @@ darkMode = False
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def getPlotTheme():
+<pre><code class="python">def get_plot_theme():
     &#34;&#34;&#34;Returns a correct plot style accrording to the state of dark mode.
 
     Returns:
         str: Plot style.
     &#34;&#34;&#34;
-    global darkMode
-    if darkMode:
+    global dark_mode
+    if dark_mode:
         return &#39;dark_background&#39;
     else:
         return &#39;ggplot&#39;</code></pre>
 </details>
 </dd>
-<dt id="project.getSpeedsPerMonth"><code class="name flex">
-<span>def <span class="ident">getSpeedsPerMonth</span></span>(<span>selected_month, data)</span>
+<dt id="project.get_speeds_per_month"><code class="name flex">
+<span>def <span class="ident">get_speeds_per_month</span></span>(<span>selected_month, data)</span>
 </code></dt>
 <dd>
 <section class="desc"><p>Returns all the speeds for a selected month.</p>
@@ -649,7 +640,7 @@ darkMode = False
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def getSpeedsPerMonth(selected_month, data):
+<pre><code class="python">def get_speeds_per_month(selected_month, data):
     &#34;&#34;&#34;Returns all the speeds for a selected month.
 
     Args:
@@ -665,15 +656,15 @@ darkMode = False
     month_number = str(dt.datetime.strptime(selected_month, &#39;%B&#39;).month)
     for dict in data:
         # formats a date string into a month number
-        temp_month = getDateObject(dict[&#39;date&#39;]).strftime(&#34;%m&#34;).lstrip(&#39;0&#39;)
+        temp_month = get_date_object(dict[&#39;date&#39;]).strftime(&#34;%m&#34;).lstrip(&#39;0&#39;)
         if month_number == temp_month:
             speeds.append(float(dict[&#39;download&#39;]))
 
     return speeds</code></pre>
 </details>
 </dd>
-<dt id="project.parseData"><code class="name flex">
-<span>def <span class="ident">parseData</span></span>(<span>)</span>
+<dt id="project.parse_data"><code class="name flex">
+<span>def <span class="ident">parse_data</span></span>(<span>)</span>
 </code></dt>
 <dd>
 <section class="desc"><p>Uses Parser class to parse data into a global variable.</p></section>
@@ -681,15 +672,15 @@ darkMode = False
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def parseData():
+<pre><code class="python">def parse_data():
     &#34;&#34;&#34;Uses Parser class to parse data into a global variable.&#34;&#34;&#34;
     global data
-    data = parser.getData(separator=&#39;,&#39;)
+    data = parser.get_data(separator=&#39;,&#39;)
     input(&#34;Click ENTER to continue...&#34;)</code></pre>
 </details>
 </dd>
-<dt id="project.toggleDarkMode"><code class="name flex">
-<span>def <span class="ident">toggleDarkMode</span></span>(<span>)</span>
+<dt id="project.toggle_dark_mode"><code class="name flex">
+<span>def <span class="ident">toggle_dark_mode</span></span>(<span>)</span>
 </code></dt>
 <dd>
 <section class="desc"><p>Toggles a dark mode state.</p></section>
@@ -697,12 +688,12 @@ darkMode = False
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def toggleDarkMode():
+<pre><code class="python">def toggle_dark_mode():
     &#34;&#34;&#34;Toggles a dark mode state.&#34;&#34;&#34;
-    global darkMode
-    darkMode ^= True
+    global dark_mode
+    dark_mode ^= True
     print(&#34;Dark mode is:&#34;, end=&#34; &#34;)
-    if darkMode:
+    if dark_mode:
         print(colored(&#34;ON&#34;, &#34;green&#34;))
         print(&#34;Open a graph to see the results.&#34;)
     else:
@@ -763,7 +754,7 @@ reading the file.</dd>
             print(colored(&#39;File doesn\&#39;t exist&#39;, &#39;red&#39;))
             return None
 
-    def getData(self, separator):
+    def get_data(self, separator):
         &#34;&#34;&#34;Method for reading csv contents and parsing it into a list of
             dictionaries.
 
@@ -813,8 +804,8 @@ reading the file.</dd>
 </details>
 <h3>Methods</h3>
 <dl>
-<dt id="project.Parser.getData"><code class="name flex">
-<span>def <span class="ident">getData</span></span>(<span>self, separator)</span>
+<dt id="project.Parser.get_data"><code class="name flex">
+<span>def <span class="ident">get_data</span></span>(<span>self, separator)</span>
 </code></dt>
 <dd>
 <section class="desc"><p>Method for reading csv contents and parsing it into a list of
@@ -832,7 +823,7 @@ and will automatically assign correct headers.</p>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def getData(self, separator):
+<pre><code class="python">def get_data(self, separator):
     &#34;&#34;&#34;Method for reading csv contents and parsing it into a list of
         dictionaries.
 
@@ -930,24 +921,24 @@ file that is not a csv.</p>
 <li><h3><a href="#header-variables">Global variables</a></h3>
 <ul class="">
 <li><code><a title="project.choice" href="#project.choice">choice</a></code></li>
-<li><code><a title="project.darkMode" href="#project.darkMode">darkMode</a></code></li>
+<li><code><a title="project.dark_mode" href="#project.dark_mode">dark_mode</a></code></li>
 <li><code><a title="project.data" href="#project.data">data</a></code></li>
 <li><code><a title="project.parser" href="#project.parser">parser</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="project.askUser" href="#project.askUser">askUser</a></code></li>
+<li><code><a title="project.ask_user" href="#project.ask_user">ask_user</a></code></li>
 <li><code><a title="project.check_data" href="#project.check_data">check_data</a></code></li>
-<li><code><a title="project.filterByCity" href="#project.filterByCity">filterByCity</a></code></li>
-<li><code><a title="project.getAverageFromList" href="#project.getAverageFromList">getAverageFromList</a></code></li>
-<li><code><a title="project.getAverageSpeedPerMonths" href="#project.getAverageSpeedPerMonths">getAverageSpeedPerMonths</a></code></li>
-<li><code><a title="project.getDateObject" href="#project.getDateObject">getDateObject</a></code></li>
-<li><code><a title="project.getPlotConfig" href="#project.getPlotConfig">getPlotConfig</a></code></li>
-<li><code><a title="project.getPlotTheme" href="#project.getPlotTheme">getPlotTheme</a></code></li>
-<li><code><a title="project.getSpeedsPerMonth" href="#project.getSpeedsPerMonth">getSpeedsPerMonth</a></code></li>
-<li><code><a title="project.parseData" href="#project.parseData">parseData</a></code></li>
-<li><code><a title="project.toggleDarkMode" href="#project.toggleDarkMode">toggleDarkMode</a></code></li>
+<li><code><a title="project.filter_by_city" href="#project.filter_by_city">filter_by_city</a></code></li>
+<li><code><a title="project.get_average_from_list" href="#project.get_average_from_list">get_average_from_list</a></code></li>
+<li><code><a title="project.get_average_speed_per_months" href="#project.get_average_speed_per_months">get_average_speed_per_months</a></code></li>
+<li><code><a title="project.get_date_object" href="#project.get_date_object">get_date_object</a></code></li>
+<li><code><a title="project.get_plot_config" href="#project.get_plot_config">get_plot_config</a></code></li>
+<li><code><a title="project.get_plot_theme" href="#project.get_plot_theme">get_plot_theme</a></code></li>
+<li><code><a title="project.get_speeds_per_month" href="#project.get_speeds_per_month">get_speeds_per_month</a></code></li>
+<li><code><a title="project.parse_data" href="#project.parse_data">parse_data</a></code></li>
+<li><code><a title="project.toggle_dark_mode" href="#project.toggle_dark_mode">toggle_dark_mode</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
@@ -955,7 +946,7 @@ file that is not a csv.</p>
 <li>
 <h4><code><a title="project.Parser" href="#project.Parser">Parser</a></code></h4>
 <ul class="">
-<li><code><a title="project.Parser.getData" href="#project.Parser.getData">getData</a></code></li>
+<li><code><a title="project.Parser.get_data" href="#project.Parser.get_data">get_data</a></code></li>
 <li><code><a title="project.Parser.get_path" href="#project.Parser.get_path">get_path</a></code></li>
 </ul>
 </li>
