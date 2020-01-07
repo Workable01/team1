@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.7.2" />
-<title>TDC_Case_Report_Group_23 API documentation</title>
+<title>project API documentation</title>
 <meta name="description" content="" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
@@ -17,34 +17,28 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>TDC_Case_Report_Group_23</code></h1>
+<h1 class="title"><code>Documentation</code></h1>
 </header>
 <section id="section-intro">
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python"># coding=utf-8
+<pre><code class="python">import matplotlib.pyplot as plt
+from termcolor import colored
+from os import path
+import datetime as dt
+from time import process_time
+import csv
+import colorama
+from pprint import pprint as pp
 
-import matplotlib.pyplot as plt  # plotting data
-from termcolor import colored  # print colored messages in the terminal
-import colorama  # makes termcolor work on windows
-from os import path  # working with file path
-import datetime as dt  # parsing and formatting date
-from time import process_time  # measuring execution time of code
-import csv  # reading csv files
-from pprint import pprint as pp  # prettyfied printing, easier debugging
-
-# ------------------------------------------------------
-# To find program exectuion, go to the end of this file.
-# ------------------------------------------------------
 
 
 class Parser:
     &#34;&#34;&#34;This is a class for parsing and retrieving CSV data.&#34;&#34;&#34;
 
-    # default utf8 encoding to be able to read special characters like Ø
-    def __init__(self, encoding=&#34;utf8&#34;):
+    def __init__(self, encoding=&#39;utf8&#39;):
         &#34;&#34;&#34;
         Args:
             encoding (str, optional): Specify which encoding should be used in
@@ -55,39 +49,22 @@ class Parser:
     def get_path(self):
         &#34;&#34;&#34;Method that asks a user for a path and returns it.
 
-        Provides simple validation if file doesn&#39;t exists or user has put in a
+        Provides simple validation if file doesn&#39;t exists or user has put in a 
         file that is not a csv.
 
         Returns:
             String if successful, None otherwise.
         &#34;&#34;&#34;
-        path_csv = input(&#34;Enter path to your csv file: &#34;)
+        path_csv = input(&#39;Enter path to your csv file: &#39;)
         if path.exists(path_csv):
-            # splits path into file name and file extension
-            # with [1] we get only the extension
             extension = path.splitext(path_csv)[1]
-            if extension == &#34;.csv&#34;:
+            if extension == &#39;.csv&#39;:
                 return path_csv
             else:
-                print(colored(&#34;File is not a csv&#34;, &#34;red&#34;))
+                print(colored(&#39;File is not a csv&#39;, &#39;red&#39;))
                 return None
         else:
-            print(colored(&#34;File doesn&#39;t exist&#34;, &#34;red&#34;))
-            print(
-                colored(
-                    &#34;&#34;&#34;If you don&#39;t know how to write a path, try putting the
-                    file in the same directory as your program&#34;&#34;&#34;,
-                    &#34;red&#34;,
-                )
-            )
-            print(
-                colored(
-                    &#34;&#34;&#34;Path has to come from the directory you ran the program
-                    in, which is not necessarily a directory of the python
-                    program.&#34;&#34;&#34;,
-                    &#34;red&#34;,
-                )
-            )
+            print(colored(&#39;File doesn\&#39;t exist&#39;, &#39;red&#39;))
             return None
 
     def get_data(self, separator):
@@ -111,15 +88,14 @@ class Parser:
         t = process_time()
 
         data = []
-        # opens a file in read mode and reads it with the correct encoding
+
         with open(path_csv, encoding=self.encoding) as file:
 
-            # gets all of the lines in the file
             reader = csv.reader(file, delimiter=separator)
 
             # get headers from the first line
-            # skips the first line and saves it in a list
             headers = next(reader)
+
             # loop over remaining lines and put them into list of dictionaries
             for line in reader:
                 # continue parsing only if the data is correct
@@ -131,31 +107,25 @@ class Parser:
                     # connecting values with headers and creating a dictionary
                     data.append(dict(zip(headers, values)))
 
-        if not data:
-            print(colored(&#34;There was no data parsed, try again.&#34;, &#34;red&#34;))
-            return
-
         # getting result of time elapsed
         time_elapsed = round(process_time() - t, 5)
 
-        print(colored(&#34;CSV successfully parsed with csv module&#34;, &#34;green&#34;))
-        print(colored(f&#34;Time to read and parse: {time_elapsed}s&#34;, &#34;white&#34;))
+        print(colored(&#39;CSV successfully parsed with csv module&#39;, &#39;green&#39;))
+        print(colored(f&#39;Time to read and parse: {time_elapsed}s&#39;, &#39;white&#39;))
+
         return data
 
 
 def check_data(func):
-    &#34;&#34;&#34;Decorator function to check if the data exists before user tries to use
-    functions that require it.&#34;&#34;&#34;
-
+    &#34;&#34;&#34;Decorator function to check if the data exists before user tries to use functions that require it.&#34;&#34;&#34;
     def inner(*args, **kwargs):
         # checking if first argument (data) is empty
         if args[0]:
             func(*args, **kwargs)
         else:
-            print(colored(&#34;There is no data to work with.&#34;, &#34;red&#34;))
+            print(colored(&#34;There is not data to work with.&#34;, &#39;red&#39;))
             print(&#34;Try parsing the file first.&#34;)
             input(&#34;Click ENTER to continue...&#34;)
-
     return inner
 
 
@@ -170,7 +140,7 @@ def filter_by_city(city, data):
         list: List of ditionaries.
     &#34;&#34;&#34;
     # filter that compares location using a lambda operator
-    return list(filter(lambda x: x[&#34;location&#34;] == city, data))
+    return list(filter(lambda x: x[&#39;location&#39;] == city, data))
 
 
 def get_date_object(string_date):
@@ -182,7 +152,7 @@ def get_date_object(string_date):
     Returns:
         datetime: Object with useful methods for working with date.
     &#34;&#34;&#34;
-    return dt.datetime.strptime(string_date, &#34;%Y-%m-%d&#34;)
+    return dt.datetime.strptime(string_date, &#39;%Y-%m-%d&#39;)
 
 
 def get_average_from_list(list):
@@ -194,20 +164,22 @@ def get_average_from_list(list):
     Returns:
         int: Average of a list.
     &#34;&#34;&#34;
-    # calculate the average
+    # calculate the average by dividing the sum of numbers by the quantity of numbers
     return sum(list) / len(list)
 
 
-def ask_user(menu):
+def ask_user(path):
     &#34;&#34;&#34;Prints out a menu and asks for users input accordingly.
 
     Args:
-        menu (str): Text that defines the menu.
+        path (str): Path to the text file that defines the menu.
 
     Returns:
         String if input is text, Int if input is a number.
     &#34;&#34;&#34;
-    print(menu)
+    file = open(path, encoding=&#39;utf8&#39;)
+    txt = file.read()
+    print(txt)
     res = input()
     if res.isdigit():
         return int(res)
@@ -224,19 +196,19 @@ def get_average_speed_per_months(city, data):
 
     Returns:
         dict: {
-            &#39;x&#39;: (list): Months,
-            &#39;y&#39;: (list): Average speeds.
+            &#39;x&#39;: list: Months,
+            &#39;y&#39;: list: Average speeds.
             }
     &#34;&#34;&#34;
     city = filter_by_city(city, data)
     months_dict = {}
     for dict in city:
         temp_list = []
-        month = get_date_object(dict[&#34;date&#34;]).month
+        month = get_date_object(dict[&#39;date&#39;]).month
         if month in months_dict:
-            months_dict[month].append(float(dict[&#34;download&#34;]))
+            months_dict[month].append(float(dict[&#39;download&#39;]))
         else:
-            temp_list.append(float(dict[&#34;download&#34;]))
+            temp_list.append(float(dict[&#39;download&#39;]))
             months_dict[month] = temp_list
 
     avg_dict = {}
@@ -245,14 +217,13 @@ def get_average_speed_per_months(city, data):
 
     items = avg_dict.items()
     tuples = sorted(items)
-    # asterisk takes tuples out of a list and spreads them out
-    # (positional expansion)
+    # asterisk takes the tuples out of the list and spreads them out (positional expansion)
     # e.g. [1,2,3,4] &gt; 1, 2, 3, 4
     # zip pairs items from lists together
     # e.g. [1, 2, 3], [&#34;a&#34;, &#34;b&#34;, &#34;c&#34;] &gt; [[1, &#34;a&#34;], [2, &#34;b&#34;], [3, &#34;c&#34;]]
     x, y = zip(*tuples)
 
-    return {&#34;x&#34;: x, &#34;y&#34;: y}
+    return {&#39;x&#39;: x, &#39;y&#39;: y}
 
 
 def get_speeds_per_month(selected_month, data):
@@ -268,12 +239,12 @@ def get_speeds_per_month(selected_month, data):
     speeds = []
 
     # parses a month name into a month number
-    month_number = str(dt.datetime.strptime(selected_month, &#34;%B&#34;).month)
+    month_number = str(dt.datetime.strptime(selected_month, &#39;%B&#39;).month)
     for dict in data:
         # formats a date string into a month number
-        temp_month = get_date_object(dict[&#34;date&#34;]).strftime(&#34;%m&#34;).lstrip(&#34;0&#34;)
+        temp_month = get_date_object(dict[&#39;date&#39;]).strftime(&#34;%m&#34;).lstrip(&#39;0&#39;)
         if month_number == temp_month:
-            speeds.append(float(dict[&#34;download&#34;]))
+            speeds.append(float(dict[&#39;download&#39;]))
 
     return speeds
 
@@ -290,7 +261,7 @@ def get_plot_config(label_x=&#34;x&#34;, label_y=&#34;y&#34;, ticks=10):
     plt.xlabel(label_x)
     plt.ylabel(label_y)
     plt.xticks(ticks)
-    plt.legend(loc=&#34;best&#34;)
+    plt.legend(loc=&#39;best&#39;)
     plt.show()
 
 
@@ -302,16 +273,15 @@ def get_plot_theme():
     &#34;&#34;&#34;
     global dark_mode
     if dark_mode:
-        return &#34;dark_background&#34;
+        return &#39;dark_background&#39;
     else:
-        return &#34;ggplot&#34;
+        return &#39;ggplot&#39;
 
 
 def parse_data():
     &#34;&#34;&#34;Uses Parser class to parse data into a global variable.&#34;&#34;&#34;
-    # use variable data from the global scope
     global data
-    data = parser.get_data(separator=&#34;,&#34;)
+    data = parser.get_data(separator=&#39;,&#39;)
     input(&#34;Click ENTER to continue...&#34;)
 
 
@@ -328,106 +298,20 @@ def toggle_dark_mode():
     input(&#34;Click ENTER to continue...&#34;)
 
 
-menu = &#34;&#34;&#34;
-| —MENU—
-| Enter a number to select the function you want to perform:
-| 1. Parse the CSV file.
-| 2. Print average download speed for Fanø in August and September.
-| 3. Plot monthly average download speed for Copenhagen and Ballerup.
-| 4. Create a bar plot of the upload speed per date for Lolland Commune
-| 5. Toggle dark mode
-| Press Q to quit
-&#34;&#34;&#34;
-
-
-colorama.init()
 &#34;&#34;&#34;Makes colored terminal output work on Windows&#34;&#34;&#34;
+colorama.init()
 
-parser = Parser(&#34;utf8&#34;)
+parser = Parser(&#39;utf8&#39;)
 &#34;&#34;&#34;Parser: Instance of the Parser class.&#34;&#34;&#34;
 
 data = []
 &#34;&#34;&#34;List: Used as a container for the parsed data.&#34;&#34;&#34;
 
-choice = ask_user(menu)
+choice = ask_user(&#39;menu.txt&#39;)
 &#34;&#34;&#34;String: Getting and storing users input.&#34;&#34;&#34;
 
 dark_mode = False
-&#34;&#34;&#34;Boolean: Keeps track if DarkMode is ON or OFF&#34;&#34;&#34;
-
-
-@check_data
-def function2(data):
-    first_month = &#34;August&#34;
-    second_month = &#34;September&#34;
-    city = &#34;Fanø&#34;
-    city_data = filter_by_city(city, data)
-    august_speeds = get_speeds_per_month(first_month, city_data)
-    september_speeds = get_speeds_per_month(second_month, city_data)
-    print(
-        f&#34;Average download speed for {first_month} and {second_month} in {city} is:&#34;
-    )
-    print(
-        colored(
-            get_average_from_list(august_speeds + september_speeds), &#34;green&#34;
-        )
-    )
-    input(&#34;Click ENTER to continue...&#34;)
-
-
-@check_data
-def function3(data):
-    average_speed_ballerup = get_average_speed_per_months(&#34;Ballerup&#34;, data)
-    average_speed_copenhagen = get_average_speed_per_months(&#34;Copenhagen&#34;, data)
-    # plots the data with a correct theme
-    with plt.style.context(get_plot_theme()):
-        plt.plot(
-            average_speed_ballerup[&#34;x&#34;],
-            average_speed_ballerup[&#34;y&#34;],
-            &#34;red&#34;,
-            label=&#34;Ballerup&#34;,
-        )
-        plt.plot(
-            average_speed_copenhagen[&#34;x&#34;],
-            average_speed_copenhagen[&#34;y&#34;],
-            &#34;blue&#34;,
-            label=&#34;Copenhagen&#34;,
-        )
-        get_plot_config(
-            label_x=&#34;Month&#34;,
-            label_y=&#34;Avg. Download speed&#34;,
-            # getting the number of months from dictionary
-            ticks=average_speed_ballerup[&#34;x&#34;],
-        )
-
-
-@check_data
-def function4(data):
-    city = &#34;Lolland&#34;
-    average_speed = get_average_speed_per_months(city, data)
-    # plots the data with a correct theme
-    with plt.style.context(get_plot_theme()):
-        plt.bar(average_speed[&#34;x&#34;], average_speed[&#34;y&#34;], label=city)
-        get_plot_config(
-            label_x=&#34;Month&#34;,
-            label_y=&#34;Avg. Download speed&#34;,
-            ticks=average_speed[&#34;x&#34;],
-        )
-
-
-# selecting a function based on a users choice
-while choice != &#34;q&#34;:
-    if choice == 1:
-        parse_data()
-    elif choice == 2:
-        function2(data)
-    elif choice == 3:
-        function3(data)
-    elif choice == 4:
-        function4(data)
-    elif choice == 5:
-        toggle_dark_mode()
-    choice = ask_user(menu)</code></pre>
+&#34;&#34;&#34;Boolean: Keeps track if DarkMode is ON or OFF&#34;&#34;&#34;</code></pre>
 </details>
 </section>
 <section>
@@ -435,19 +319,19 @@ while choice != &#34;q&#34;:
 <section>
 <h2 class="section-title" id="header-variables">Global variables</h2>
 <dl>
-<dt id="TDC_Case_Report_Group_23.choice"><code class="name">var <span class="ident">choice</span></code></dt>
+<dt id="project.choice"><code class="name">var <span class="ident">choice</span></code></dt>
 <dd>
 <section class="desc"><p>String: Getting and storing users input.</p></section>
 </dd>
-<dt id="TDC_Case_Report_Group_23.dark_mode"><code class="name">var <span class="ident">dark_mode</span></code></dt>
+<dt id="project.dark_mode"><code class="name">var <span class="ident">dark_mode</span></code></dt>
 <dd>
 <section class="desc"><p>Boolean: Keeps track if DarkMode is ON or OFF</p></section>
 </dd>
-<dt id="TDC_Case_Report_Group_23.data"><code class="name">var <span class="ident">data</span></code></dt>
+<dt id="project.data"><code class="name">var <span class="ident">data</span></code></dt>
 <dd>
 <section class="desc"><p>List: Used as a container for the parsed data.</p></section>
 </dd>
-<dt id="TDC_Case_Report_Group_23.parser"><code class="name">var <span class="ident">parser</span></code></dt>
+<dt id="project.parser"><code class="name">var <span class="ident">parser</span></code></dt>
 <dd>
 <section class="desc"><p>Parser: Instance of the Parser class.</p></section>
 </dd>
@@ -456,15 +340,15 @@ while choice != &#34;q&#34;:
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="TDC_Case_Report_Group_23.ask_user"><code class="name flex">
-<span>def <span class="ident">ask_user</span></span>(<span>menu)</span>
+<dt id="project.ask_user"><code class="name flex">
+<span>def <span class="ident">ask_user</span></span>(<span>path)</span>
 </code></dt>
 <dd>
 <section class="desc"><p>Prints out a menu and asks for users input accordingly.</p>
 <h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>menu</code></strong> :&ensp;<code>str</code></dt>
-<dd>Text that defines the menu.</dd>
+<dt><strong><code>path</code></strong> :&ensp;<code>str</code></dt>
+<dd>Path to the text file that defines the menu.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <p>String if input is text, Int if input is a number.</p></section>
@@ -472,16 +356,18 @@ while choice != &#34;q&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def ask_user(menu):
+<pre><code class="python">def ask_user(path):
     &#34;&#34;&#34;Prints out a menu and asks for users input accordingly.
 
     Args:
-        menu (str): Text that defines the menu.
+        path (str): Path to the text file that defines the menu.
 
     Returns:
         String if input is text, Int if input is a number.
     &#34;&#34;&#34;
-    print(menu)
+    file = open(path, encoding=&#39;utf8&#39;)
+    txt = file.read()
+    print(txt)
     res = input()
     if res.isdigit():
         return int(res)
@@ -489,33 +375,29 @@ while choice != &#34;q&#34;:
         return res.lower()</code></pre>
 </details>
 </dd>
-<dt id="TDC_Case_Report_Group_23.check_data"><code class="name flex">
+<dt id="project.check_data"><code class="name flex">
 <span>def <span class="ident">check_data</span></span>(<span>func)</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Decorator function to check if the data exists before user tries to use
-functions that require it.</p></section>
+<section class="desc"><p>Decorator function to check if the data exists before user tries to use functions that require it.</p></section>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def check_data(func):
-    &#34;&#34;&#34;Decorator function to check if the data exists before user tries to use
-    functions that require it.&#34;&#34;&#34;
-
+    &#34;&#34;&#34;Decorator function to check if the data exists before user tries to use functions that require it.&#34;&#34;&#34;
     def inner(*args, **kwargs):
         # checking if first argument (data) is empty
         if args[0]:
             func(*args, **kwargs)
         else:
-            print(colored(&#34;There is no data to work with.&#34;, &#34;red&#34;))
+            print(colored(&#34;There is not data to work with.&#34;, &#39;red&#39;))
             print(&#34;Try parsing the file first.&#34;)
             input(&#34;Click ENTER to continue...&#34;)
-
     return inner</code></pre>
 </details>
 </dd>
-<dt id="TDC_Case_Report_Group_23.filter_by_city"><code class="name flex">
+<dt id="project.filter_by_city"><code class="name flex">
 <span>def <span class="ident">filter_by_city</span></span>(<span>city, data)</span>
 </code></dt>
 <dd>
@@ -524,7 +406,7 @@ functions that require it.</p></section>
 <dl>
 <dt><strong><code>city</code></strong> :&ensp;<code>str</code></dt>
 <dd>City name.</dd>
-<dt><strong><a title="TDC_Case_Report_Group_23.data" href="#TDC_Case_Report_Group_23.data"><code>data</code></a></strong> :&ensp;<code>list</code> of <code>dict</code></dt>
+<dt><strong><a title="project.data" href="#project.data"><code>data</code></a></strong> :&ensp;<code>list</code> of <code>dict</code></dt>
 <dd>Data to be filtered.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
@@ -547,67 +429,10 @@ functions that require it.</p></section>
         list: List of ditionaries.
     &#34;&#34;&#34;
     # filter that compares location using a lambda operator
-    return list(filter(lambda x: x[&#34;location&#34;] == city, data))</code></pre>
+    return list(filter(lambda x: x[&#39;location&#39;] == city, data))</code></pre>
 </details>
 </dd>
-<dt id="TDC_Case_Report_Group_23.function2"><code class="name flex">
-<span>def <span class="ident">function2</span></span>(<span>*args, **kwargs)</span>
-</code></dt>
-<dd>
-<section class="desc"></section>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def inner(*args, **kwargs):
-    # checking if first argument (data) is empty
-    if args[0]:
-        func(*args, **kwargs)
-    else:
-        print(colored(&#34;There is no data to work with.&#34;, &#34;red&#34;))
-        print(&#34;Try parsing the file first.&#34;)
-        input(&#34;Click ENTER to continue...&#34;)</code></pre>
-</details>
-</dd>
-<dt id="TDC_Case_Report_Group_23.function3"><code class="name flex">
-<span>def <span class="ident">function3</span></span>(<span>*args, **kwargs)</span>
-</code></dt>
-<dd>
-<section class="desc"></section>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def inner(*args, **kwargs):
-    # checking if first argument (data) is empty
-    if args[0]:
-        func(*args, **kwargs)
-    else:
-        print(colored(&#34;There is no data to work with.&#34;, &#34;red&#34;))
-        print(&#34;Try parsing the file first.&#34;)
-        input(&#34;Click ENTER to continue...&#34;)</code></pre>
-</details>
-</dd>
-<dt id="TDC_Case_Report_Group_23.function4"><code class="name flex">
-<span>def <span class="ident">function4</span></span>(<span>*args, **kwargs)</span>
-</code></dt>
-<dd>
-<section class="desc"></section>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def inner(*args, **kwargs):
-    # checking if first argument (data) is empty
-    if args[0]:
-        func(*args, **kwargs)
-    else:
-        print(colored(&#34;There is no data to work with.&#34;, &#34;red&#34;))
-        print(&#34;Try parsing the file first.&#34;)
-        input(&#34;Click ENTER to continue...&#34;)</code></pre>
-</details>
-</dd>
-<dt id="TDC_Case_Report_Group_23.get_average_from_list"><code class="name flex">
+<dt id="project.get_average_from_list"><code class="name flex">
 <span>def <span class="ident">get_average_from_list</span></span>(<span>list)</span>
 </code></dt>
 <dd>
@@ -635,11 +460,11 @@ functions that require it.</p></section>
     Returns:
         int: Average of a list.
     &#34;&#34;&#34;
-    # calculate the average
+    # calculate the average by dividing the sum of numbers by the quantity of numbers
     return sum(list) / len(list)</code></pre>
 </details>
 </dd>
-<dt id="TDC_Case_Report_Group_23.get_average_speed_per_months"><code class="name flex">
+<dt id="project.get_average_speed_per_months"><code class="name flex">
 <span>def <span class="ident">get_average_speed_per_months</span></span>(<span>city, data)</span>
 </code></dt>
 <dd>
@@ -648,15 +473,15 @@ functions that require it.</p></section>
 <dl>
 <dt><strong><code>city</code></strong> :&ensp;<code>str</code></dt>
 <dd>City name.</dd>
-<dt><strong><a title="TDC_Case_Report_Group_23.data" href="#TDC_Case_Report_Group_23.data"><code>data</code></a></strong> :&ensp;<code>list</code> of <code>dict</code></dt>
+<dt><strong><a title="project.data" href="#project.data"><code>data</code></a></strong> :&ensp;<code>list</code> of <code>dict</code></dt>
 <dd>Data to be used.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <dl>
 <dt><strong><code>dict</code></strong></dt>
 <dd>{
-'x': (list): Months,
-'y': (list): Average speeds.
+'x': list: Months,
+'y': list: Average speeds.
 }</dd>
 </dl></section>
 <details class="source">
@@ -672,19 +497,19 @@ functions that require it.</p></section>
 
     Returns:
         dict: {
-            &#39;x&#39;: (list): Months,
-            &#39;y&#39;: (list): Average speeds.
+            &#39;x&#39;: list: Months,
+            &#39;y&#39;: list: Average speeds.
             }
     &#34;&#34;&#34;
     city = filter_by_city(city, data)
     months_dict = {}
     for dict in city:
         temp_list = []
-        month = get_date_object(dict[&#34;date&#34;]).month
+        month = get_date_object(dict[&#39;date&#39;]).month
         if month in months_dict:
-            months_dict[month].append(float(dict[&#34;download&#34;]))
+            months_dict[month].append(float(dict[&#39;download&#39;]))
         else:
-            temp_list.append(float(dict[&#34;download&#34;]))
+            temp_list.append(float(dict[&#39;download&#39;]))
             months_dict[month] = temp_list
 
     avg_dict = {}
@@ -693,17 +518,16 @@ functions that require it.</p></section>
 
     items = avg_dict.items()
     tuples = sorted(items)
-    # asterisk takes tuples out of a list and spreads them out
-    # (positional expansion)
+    # asterisk takes the tuples out of the list and spreads them out (positional expansion)
     # e.g. [1,2,3,4] &gt; 1, 2, 3, 4
     # zip pairs items from lists together
     # e.g. [1, 2, 3], [&#34;a&#34;, &#34;b&#34;, &#34;c&#34;] &gt; [[1, &#34;a&#34;], [2, &#34;b&#34;], [3, &#34;c&#34;]]
     x, y = zip(*tuples)
 
-    return {&#34;x&#34;: x, &#34;y&#34;: y}</code></pre>
+    return {&#39;x&#39;: x, &#39;y&#39;: y}</code></pre>
 </details>
 </dd>
-<dt id="TDC_Case_Report_Group_23.get_date_object"><code class="name flex">
+<dt id="project.get_date_object"><code class="name flex">
 <span>def <span class="ident">get_date_object</span></span>(<span>string_date)</span>
 </code></dt>
 <dd>
@@ -731,10 +555,10 @@ functions that require it.</p></section>
     Returns:
         datetime: Object with useful methods for working with date.
     &#34;&#34;&#34;
-    return dt.datetime.strptime(string_date, &#34;%Y-%m-%d&#34;)</code></pre>
+    return dt.datetime.strptime(string_date, &#39;%Y-%m-%d&#39;)</code></pre>
 </details>
 </dd>
-<dt id="TDC_Case_Report_Group_23.get_plot_config"><code class="name flex">
+<dt id="project.get_plot_config"><code class="name flex">
 <span>def <span class="ident">get_plot_config</span></span>(<span>label_x='x', label_y='y', ticks=10)</span>
 </code></dt>
 <dd>
@@ -764,11 +588,11 @@ functions that require it.</p></section>
     plt.xlabel(label_x)
     plt.ylabel(label_y)
     plt.xticks(ticks)
-    plt.legend(loc=&#34;best&#34;)
+    plt.legend(loc=&#39;best&#39;)
     plt.show()</code></pre>
 </details>
 </dd>
-<dt id="TDC_Case_Report_Group_23.get_plot_theme"><code class="name flex">
+<dt id="project.get_plot_theme"><code class="name flex">
 <span>def <span class="ident">get_plot_theme</span></span>(<span>)</span>
 </code></dt>
 <dd>
@@ -790,12 +614,12 @@ functions that require it.</p></section>
     &#34;&#34;&#34;
     global dark_mode
     if dark_mode:
-        return &#34;dark_background&#34;
+        return &#39;dark_background&#39;
     else:
-        return &#34;ggplot&#34;</code></pre>
+        return &#39;ggplot&#39;</code></pre>
 </details>
 </dd>
-<dt id="TDC_Case_Report_Group_23.get_speeds_per_month"><code class="name flex">
+<dt id="project.get_speeds_per_month"><code class="name flex">
 <span>def <span class="ident">get_speeds_per_month</span></span>(<span>selected_month, data)</span>
 </code></dt>
 <dd>
@@ -804,7 +628,7 @@ functions that require it.</p></section>
 <dl>
 <dt><strong><code>selected_month</code></strong> :&ensp;<code>str</code></dt>
 <dd>Full month name.</dd>
-<dt><strong><a title="TDC_Case_Report_Group_23.data" href="#TDC_Case_Report_Group_23.data"><code>data</code></a></strong> :&ensp;<code>list</code> of <code>dict</code></dt>
+<dt><strong><a title="project.data" href="#project.data"><code>data</code></a></strong> :&ensp;<code>list</code> of <code>dict</code></dt>
 <dd>Data to be used.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
@@ -829,17 +653,17 @@ functions that require it.</p></section>
     speeds = []
 
     # parses a month name into a month number
-    month_number = str(dt.datetime.strptime(selected_month, &#34;%B&#34;).month)
+    month_number = str(dt.datetime.strptime(selected_month, &#39;%B&#39;).month)
     for dict in data:
         # formats a date string into a month number
-        temp_month = get_date_object(dict[&#34;date&#34;]).strftime(&#34;%m&#34;).lstrip(&#34;0&#34;)
+        temp_month = get_date_object(dict[&#39;date&#39;]).strftime(&#34;%m&#34;).lstrip(&#39;0&#39;)
         if month_number == temp_month:
-            speeds.append(float(dict[&#34;download&#34;]))
+            speeds.append(float(dict[&#39;download&#39;]))
 
     return speeds</code></pre>
 </details>
 </dd>
-<dt id="TDC_Case_Report_Group_23.parse_data"><code class="name flex">
+<dt id="project.parse_data"><code class="name flex">
 <span>def <span class="ident">parse_data</span></span>(<span>)</span>
 </code></dt>
 <dd>
@@ -850,13 +674,12 @@ functions that require it.</p></section>
 </summary>
 <pre><code class="python">def parse_data():
     &#34;&#34;&#34;Uses Parser class to parse data into a global variable.&#34;&#34;&#34;
-    # use variable data from the global scope
     global data
-    data = parser.get_data(separator=&#34;,&#34;)
+    data = parser.get_data(separator=&#39;,&#39;)
     input(&#34;Click ENTER to continue...&#34;)</code></pre>
 </details>
 </dd>
-<dt id="TDC_Case_Report_Group_23.toggle_dark_mode"><code class="name flex">
+<dt id="project.toggle_dark_mode"><code class="name flex">
 <span>def <span class="ident">toggle_dark_mode</span></span>(<span>)</span>
 </code></dt>
 <dd>
@@ -883,7 +706,7 @@ functions that require it.</p></section>
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="TDC_Case_Report_Group_23.Parser"><code class="flex name class">
+<dt id="project.Parser"><code class="flex name class">
 <span>class <span class="ident">Parser</span></span>
 <span>(</span><span>encoding='utf8')</span>
 </code></dt>
@@ -902,8 +725,7 @@ reading the file.</dd>
 <pre><code class="python">class Parser:
     &#34;&#34;&#34;This is a class for parsing and retrieving CSV data.&#34;&#34;&#34;
 
-    # default utf8 encoding to be able to read special characters like Ø
-    def __init__(self, encoding=&#34;utf8&#34;):
+    def __init__(self, encoding=&#39;utf8&#39;):
         &#34;&#34;&#34;
         Args:
             encoding (str, optional): Specify which encoding should be used in
@@ -914,39 +736,22 @@ reading the file.</dd>
     def get_path(self):
         &#34;&#34;&#34;Method that asks a user for a path and returns it.
 
-        Provides simple validation if file doesn&#39;t exists or user has put in a
+        Provides simple validation if file doesn&#39;t exists or user has put in a 
         file that is not a csv.
 
         Returns:
             String if successful, None otherwise.
         &#34;&#34;&#34;
-        path_csv = input(&#34;Enter path to your csv file: &#34;)
+        path_csv = input(&#39;Enter path to your csv file: &#39;)
         if path.exists(path_csv):
-            # splits path into file name and file extension
-            # with [1] we get only the extension
             extension = path.splitext(path_csv)[1]
-            if extension == &#34;.csv&#34;:
+            if extension == &#39;.csv&#39;:
                 return path_csv
             else:
-                print(colored(&#34;File is not a csv&#34;, &#34;red&#34;))
+                print(colored(&#39;File is not a csv&#39;, &#39;red&#39;))
                 return None
         else:
-            print(colored(&#34;File doesn&#39;t exist&#34;, &#34;red&#34;))
-            print(
-                colored(
-                    &#34;&#34;&#34;If you don&#39;t know how to write a path, try putting the
-                    file in the same directory as your program&#34;&#34;&#34;,
-                    &#34;red&#34;,
-                )
-            )
-            print(
-                colored(
-                    &#34;&#34;&#34;Path has to come from the directory you ran the program
-                    in, which is not necessarily a directory of the python
-                    program.&#34;&#34;&#34;,
-                    &#34;red&#34;,
-                )
-            )
+            print(colored(&#39;File doesn\&#39;t exist&#39;, &#39;red&#39;))
             return None
 
     def get_data(self, separator):
@@ -970,15 +775,14 @@ reading the file.</dd>
         t = process_time()
 
         data = []
-        # opens a file in read mode and reads it with the correct encoding
+
         with open(path_csv, encoding=self.encoding) as file:
 
-            # gets all of the lines in the file
             reader = csv.reader(file, delimiter=separator)
 
             # get headers from the first line
-            # skips the first line and saves it in a list
             headers = next(reader)
+
             # loop over remaining lines and put them into list of dictionaries
             for line in reader:
                 # continue parsing only if the data is correct
@@ -990,20 +794,17 @@ reading the file.</dd>
                     # connecting values with headers and creating a dictionary
                     data.append(dict(zip(headers, values)))
 
-        if not data:
-            print(colored(&#34;There was no data parsed, try again.&#34;, &#34;red&#34;))
-            return
-
         # getting result of time elapsed
         time_elapsed = round(process_time() - t, 5)
 
-        print(colored(&#34;CSV successfully parsed with csv module&#34;, &#34;green&#34;))
-        print(colored(f&#34;Time to read and parse: {time_elapsed}s&#34;, &#34;white&#34;))
+        print(colored(&#39;CSV successfully parsed with csv module&#39;, &#39;green&#39;))
+        print(colored(f&#39;Time to read and parse: {time_elapsed}s&#39;, &#39;white&#39;))
+
         return data</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
-<dt id="TDC_Case_Report_Group_23.Parser.get_data"><code class="name flex">
+<dt id="project.Parser.get_data"><code class="name flex">
 <span>def <span class="ident">get_data</span></span>(<span>self, separator)</span>
 </code></dt>
 <dd>
@@ -1043,15 +844,14 @@ and will automatically assign correct headers.</p>
     t = process_time()
 
     data = []
-    # opens a file in read mode and reads it with the correct encoding
+
     with open(path_csv, encoding=self.encoding) as file:
 
-        # gets all of the lines in the file
         reader = csv.reader(file, delimiter=separator)
 
         # get headers from the first line
-        # skips the first line and saves it in a list
         headers = next(reader)
+
         # loop over remaining lines and put them into list of dictionaries
         for line in reader:
             # continue parsing only if the data is correct
@@ -1063,19 +863,16 @@ and will automatically assign correct headers.</p>
                 # connecting values with headers and creating a dictionary
                 data.append(dict(zip(headers, values)))
 
-    if not data:
-        print(colored(&#34;There was no data parsed, try again.&#34;, &#34;red&#34;))
-        return
-
     # getting result of time elapsed
     time_elapsed = round(process_time() - t, 5)
 
-    print(colored(&#34;CSV successfully parsed with csv module&#34;, &#34;green&#34;))
-    print(colored(f&#34;Time to read and parse: {time_elapsed}s&#34;, &#34;white&#34;))
+    print(colored(&#39;CSV successfully parsed with csv module&#39;, &#39;green&#39;))
+    print(colored(f&#39;Time to read and parse: {time_elapsed}s&#39;, &#39;white&#39;))
+
     return data</code></pre>
 </details>
 </dd>
-<dt id="TDC_Case_Report_Group_23.Parser.get_path"><code class="name flex">
+<dt id="project.Parser.get_path"><code class="name flex">
 <span>def <span class="ident">get_path</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -1091,39 +888,22 @@ file that is not a csv.</p>
 <pre><code class="python">def get_path(self):
     &#34;&#34;&#34;Method that asks a user for a path and returns it.
 
-    Provides simple validation if file doesn&#39;t exists or user has put in a
+    Provides simple validation if file doesn&#39;t exists or user has put in a 
     file that is not a csv.
 
     Returns:
         String if successful, None otherwise.
     &#34;&#34;&#34;
-    path_csv = input(&#34;Enter path to your csv file: &#34;)
+    path_csv = input(&#39;Enter path to your csv file: &#39;)
     if path.exists(path_csv):
-        # splits path into file name and file extension
-        # with [1] we get only the extension
         extension = path.splitext(path_csv)[1]
-        if extension == &#34;.csv&#34;:
+        if extension == &#39;.csv&#39;:
             return path_csv
         else:
-            print(colored(&#34;File is not a csv&#34;, &#34;red&#34;))
+            print(colored(&#39;File is not a csv&#39;, &#39;red&#39;))
             return None
     else:
-        print(colored(&#34;File doesn&#39;t exist&#34;, &#34;red&#34;))
-        print(
-            colored(
-                &#34;&#34;&#34;If you don&#39;t know how to write a path, try putting the
-                file in the same directory as your program&#34;&#34;&#34;,
-                &#34;red&#34;,
-            )
-        )
-        print(
-            colored(
-                &#34;&#34;&#34;Path has to come from the directory you ran the program
-                in, which is not necessarily a directory of the python
-                program.&#34;&#34;&#34;,
-                &#34;red&#34;,
-            )
-        )
+        print(colored(&#39;File doesn\&#39;t exist&#39;, &#39;red&#39;))
         return None</code></pre>
 </details>
 </dd>
@@ -1133,44 +913,41 @@ file that is not a csv.</p>
 </section>
 </article>
 <nav id="sidebar">
-<h1>Index</h1>
+<h1>Case 23</h1>
 <div class="toc">
 <ul></ul>
 </div>
 <ul id="index">
 <li><h3><a href="#header-variables">Global variables</a></h3>
 <ul class="">
-<li><code><a title="TDC_Case_Report_Group_23.choice" href="#TDC_Case_Report_Group_23.choice">choice</a></code></li>
-<li><code><a title="TDC_Case_Report_Group_23.dark_mode" href="#TDC_Case_Report_Group_23.dark_mode">dark_mode</a></code></li>
-<li><code><a title="TDC_Case_Report_Group_23.data" href="#TDC_Case_Report_Group_23.data">data</a></code></li>
-<li><code><a title="TDC_Case_Report_Group_23.parser" href="#TDC_Case_Report_Group_23.parser">parser</a></code></li>
+<li><code><a title="project.choice" href="#project.choice">choice</a></code></li>
+<li><code><a title="project.dark_mode" href="#project.dark_mode">dark_mode</a></code></li>
+<li><code><a title="project.data" href="#project.data">data</a></code></li>
+<li><code><a title="project.parser" href="#project.parser">parser</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="TDC_Case_Report_Group_23.ask_user" href="#TDC_Case_Report_Group_23.ask_user">ask_user</a></code></li>
-<li><code><a title="TDC_Case_Report_Group_23.check_data" href="#TDC_Case_Report_Group_23.check_data">check_data</a></code></li>
-<li><code><a title="TDC_Case_Report_Group_23.filter_by_city" href="#TDC_Case_Report_Group_23.filter_by_city">filter_by_city</a></code></li>
-<li><code><a title="TDC_Case_Report_Group_23.function2" href="#TDC_Case_Report_Group_23.function2">function2</a></code></li>
-<li><code><a title="TDC_Case_Report_Group_23.function3" href="#TDC_Case_Report_Group_23.function3">function3</a></code></li>
-<li><code><a title="TDC_Case_Report_Group_23.function4" href="#TDC_Case_Report_Group_23.function4">function4</a></code></li>
-<li><code><a title="TDC_Case_Report_Group_23.get_average_from_list" href="#TDC_Case_Report_Group_23.get_average_from_list">get_average_from_list</a></code></li>
-<li><code><a title="TDC_Case_Report_Group_23.get_average_speed_per_months" href="#TDC_Case_Report_Group_23.get_average_speed_per_months">get_average_speed_per_months</a></code></li>
-<li><code><a title="TDC_Case_Report_Group_23.get_date_object" href="#TDC_Case_Report_Group_23.get_date_object">get_date_object</a></code></li>
-<li><code><a title="TDC_Case_Report_Group_23.get_plot_config" href="#TDC_Case_Report_Group_23.get_plot_config">get_plot_config</a></code></li>
-<li><code><a title="TDC_Case_Report_Group_23.get_plot_theme" href="#TDC_Case_Report_Group_23.get_plot_theme">get_plot_theme</a></code></li>
-<li><code><a title="TDC_Case_Report_Group_23.get_speeds_per_month" href="#TDC_Case_Report_Group_23.get_speeds_per_month">get_speeds_per_month</a></code></li>
-<li><code><a title="TDC_Case_Report_Group_23.parse_data" href="#TDC_Case_Report_Group_23.parse_data">parse_data</a></code></li>
-<li><code><a title="TDC_Case_Report_Group_23.toggle_dark_mode" href="#TDC_Case_Report_Group_23.toggle_dark_mode">toggle_dark_mode</a></code></li>
+<li><code><a title="project.ask_user" href="#project.ask_user">ask_user</a></code></li>
+<li><code><a title="project.check_data" href="#project.check_data">check_data</a></code></li>
+<li><code><a title="project.filter_by_city" href="#project.filter_by_city">filter_by_city</a></code></li>
+<li><code><a title="project.get_average_from_list" href="#project.get_average_from_list">get_average_from_list</a></code></li>
+<li><code><a title="project.get_average_speed_per_months" href="#project.get_average_speed_per_months">get_average_speed_per_months</a></code></li>
+<li><code><a title="project.get_date_object" href="#project.get_date_object">get_date_object</a></code></li>
+<li><code><a title="project.get_plot_config" href="#project.get_plot_config">get_plot_config</a></code></li>
+<li><code><a title="project.get_plot_theme" href="#project.get_plot_theme">get_plot_theme</a></code></li>
+<li><code><a title="project.get_speeds_per_month" href="#project.get_speeds_per_month">get_speeds_per_month</a></code></li>
+<li><code><a title="project.parse_data" href="#project.parse_data">parse_data</a></code></li>
+<li><code><a title="project.toggle_dark_mode" href="#project.toggle_dark_mode">toggle_dark_mode</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="TDC_Case_Report_Group_23.Parser" href="#TDC_Case_Report_Group_23.Parser">Parser</a></code></h4>
+<h4><code><a title="project.Parser" href="#project.Parser">Parser</a></code></h4>
 <ul class="">
-<li><code><a title="TDC_Case_Report_Group_23.Parser.get_data" href="#TDC_Case_Report_Group_23.Parser.get_data">get_data</a></code></li>
-<li><code><a title="TDC_Case_Report_Group_23.Parser.get_path" href="#TDC_Case_Report_Group_23.Parser.get_path">get_path</a></code></li>
+<li><code><a title="project.Parser.get_data" href="#project.Parser.get_data">get_data</a></code></li>
+<li><code><a title="project.Parser.get_path" href="#project.Parser.get_path">get_path</a></code></li>
 </ul>
 </li>
 </ul>
