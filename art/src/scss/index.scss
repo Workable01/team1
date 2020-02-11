@@ -1,11 +1,18 @@
-@import 'markdown-css.scss';
+@import '_markdown-css.scss';
+@import '_markdown-overrides.scss';
 
 body {
     padding: 30px;
+    font-family: 'Molot';
 }
 
 main {
     margin: auto;
     max-width: 800px;
     width: 100%;
+}
+
+@font-face {
+    font-family: 'Molot';
+    src: url(../../Molot.otf);
 }
