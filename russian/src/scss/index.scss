@@ -1,3 +1,11 @@
-body, html {
-    height: 100%;
+@import 'markdown-css.scss';
+
+body {
+    padding: 30px;
+}
+
+main {
+    margin: auto;
+    max-width: 800px;
+    width: 100%;
 }
