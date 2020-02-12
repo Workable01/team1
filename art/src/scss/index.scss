@@ -7,6 +7,12 @@ $secondRed: #FE4526;
 $dark: #221E20;
 $vanilla: #FDF5C6;
 
+@font-face {
+    font-family: Molot;
+    src: url(../src/images/Molot.otf);
+    src: url(../src/images/Molot.otf) format("otf");
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -14,7 +20,7 @@ $vanilla: #FDF5C6;
 }
 body {
     padding: 30px;
-    font-family: 'Molot';
+    font-family: Molot;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,14 +38,14 @@ main {
 }
 
 @font-face {
-    font-family: 'Molot';
+    font-family: Molot;
     src: url(../../Molot.otf);
 }
 
 strong.yess {
     position: relative;
     color: $vanilla;
-    font-family: 'Molot';
+    font-family: Molot;
     text-shadow: 2px 0 0 $dark, -2px 0 0 $dark, 0 2px 0 $dark, 0 -2px 0 $dark, 1px 1px $dark, -1px -1px 0 $dark, 1px -1px 0 $dark, -1px 1px 0 $dark;
     &::before {
         content: '';
