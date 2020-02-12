@@ -12,9 +12,16 @@ $vanilla: #FDF5C6;
     padding: 0;
     box-sizing: border-box;
 }
+
+@font-face {
+font-family: 'Molot';
+    src: url('../Molot.otf');
+    src: url('../Molot.otf') format("otf");
+} 
+
 body {
     padding: 30px;
-    font-family: Molot;
+    font-family: 'Molot';
     display: flex;
     align-items: center;
     justify-content: center;
@@ -34,7 +41,7 @@ main {
 strong.yess {
     position: relative;
     color: $vanilla;
-    font-family: Molot;
+    font-family: 'Molot';
     text-shadow: 2px 0 0 $dark, -2px 0 0 $dark, 0 2px 0 $dark, 0 -2px 0 $dark, 1px 1px $dark, -1px -1px 0 $dark, 1px -1px 0 $dark, -1px 1px 0 $dark;
     &::before {
         content: '';
@@ -55,7 +62,7 @@ strong.yess {
     position: relative;
     letter-spacing: 2px;
     font-size: 39px;
-    font-family: Molot;
+    font-family: 'Molot';
     color: $vanilla;
     overflow: hidden;
 
