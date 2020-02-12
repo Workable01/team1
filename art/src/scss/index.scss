@@ -3,7 +3,8 @@
 @import '_markdown-overrides.scss';
 
 $red: #D71B1F;
-$dark: rgba(34, 30, 32, 1);
+$secondRed: #FE4526;
+$dark: #221E20;
 $vanilla: #FDF5C6;
 
 * {
@@ -55,12 +56,13 @@ strong.yess {
 .hero-section {
     height: 650px;
     width: 100%;
-    background: $red;
+    background: linear-gradient(120deg, $secondRed, $red);
     position: relative;
     letter-spacing: 2px;
     font-size: 39px;
     font-family: Molot;
     color: $vanilla;
+    overflow: hidden;
 
     h1 {
         font-size: 36px;
@@ -80,7 +82,7 @@ strong.yess {
         bottom: 0;
         left: 0;
         right: 0;
-        background: black;
+        background: $dark;
         height: 100px;
         font-size: 30px;
     }
