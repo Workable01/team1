@@ -7,12 +7,6 @@ $secondRed: #FE4526;
 $dark: #221E20;
 $vanilla: #FDF5C6;
 
-@font-face {
-    font-family: Molot;
-    src: url(../src/images/Molot.otf);
-    src: url(../src/images/Molot.otf) format("otf");
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -35,11 +29,6 @@ body {
 
 main {
     margin: auto;
-}
-
-@font-face {
-    font-family: Molot;
-    src: url(../../Molot.otf);
 }
 
 strong.yess {
