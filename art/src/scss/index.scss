@@ -1,18 +1,106 @@
 @import '_markdown-css.scss';
+@import '_iphone.scss';
 @import '_markdown-overrides.scss';
 
+$red: #D71B1F;
+$dark: rgba(34, 30, 32, 1);
+$vanilla: #FDF5C6;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 body {
     padding: 30px;
     font-family: 'Molot';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+
+    @media only screen and (max-width: 450px) {
+        height: auto;
+        display: block;
+        padding: 0;
+    }
 }
 
 main {
     margin: auto;
-    max-width: 800px;
-    width: 100%;
 }
 
 @font-face {
     font-family: 'Molot';
     src: url(../../Molot.otf);
+}
+
+strong.yess {
+    position: relative;
+    color: $vanilla;
+    font-family: 'Molot';
+    text-shadow: 2px 0 0 $dark, -2px 0 0 $dark, 0 2px 0 $dark, 0 -2px 0 $dark, 1px 1px $dark, -1px -1px 0 $dark, 1px -1px 0 $dark, -1px 1px 0 $dark;
+    &::before {
+        content: '';
+        z-index: -1;
+        top: 30%;
+        width: 100%;
+        height: 100%;
+        background: red;
+        border-bottom: 10px solid $vanilla;
+        position: absolute;
+    }
+}
+
+.hero-section {
+    height: 80vh;
+    width: 100%;
+    background: $red;
+    position: relative;
+    letter-spacing: 2px;
+    font-size: 39px;
+    font-family: Molot;
+    color: $vanilla;
+
+    h1 {
+        font-size: 36px;
+        border: none;
+        margin: 0;
+        z-index: 4;
+        top: 62px;
+        left: 42px;
+        position: absolute;
+    }
+
+    .header {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        padding-left: 30px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: black;
+        height: 100px;
+        font-size: 30px;
+    }
+
+    #polygon {
+        left: -289px;
+        top: -259px;
+        position: absolute;
+    }
+    #hand {
+        background: none;
+        position: absolute;
+        z-index: 2;
+        right: -80px;
+        width: 350px;
+        bottom: -5px;
+        transform: rotate(-20deg);
+    }
+}
+
+.markdown-body {
+    padding: 30px 20px;
 }
