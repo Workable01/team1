@@ -1,0 +1,8 @@
+@keyframes hand {
+    from {
+        transform: translateY(0px) rotate(-20deg);
+    }
+    to {
+        transform: translateY(-5px) rotate(-20deg);
+    }
+}
