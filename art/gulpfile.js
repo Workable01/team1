@@ -29,17 +29,6 @@ function scssTask(){
     ); // put final CSS in dist folder
 }
 
-// JS task: concatenates and uglifies JS files to script.js
-function jsTask(){
-    return src([
-        files.jsPath
-        //,'!' + 'includes/js/jquery.min.js', // to exclude any specific files
-        ])
-        .pipe(concat('all.js'))
-        .pipe(uglify())
-        .pipe(dest('dist')
-    );
-}
 
 // Cachebust
 function cacheBustTask(){
@@ -65,7 +54,7 @@ function watchTask(){
 // Runs the scss and js tasks simultaneously
 // then runs cacheBust, then watch task
 exports.default = series(
-    parallel(scssTask, jsTask), 
+    scssTask, 
     cacheBustTask,
     watchTask
 );

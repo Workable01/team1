@@ -2,7 +2,7 @@
   "name": "art",
   "version": "1.0.0",
   "description": "",
-  "main": "script.js",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "autoprefixer": "^9.7.4",
+    "countup.js": "^2.0.4",
     "cssnano": "^4.1.10",
     "github-markdown-css": "^3.0.1",
     "gulp": "^4.0.2",
@@ -20,5 +21,9 @@
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2"
+  },
+  "devDependencies": {
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11"
   }
 }
