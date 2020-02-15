@@ -966,9 +966,9 @@ const tweenArray = [
   }
 ]
 
-window.addEventListener("scroll", ({ target: {scrollTop} }) => {
-		if (tweenArray.length > 0 && tweenArray.length > window.pageYOffset) {
-				hand.style.transform = `rotate(${tweenArray[window.pageYOffset].x}deg) scale(${tweenArray[window.pageYOffset].y})`
+container.addEventListener("scroll", ({ target: {scrollTop} }) => {
+		if (tweenArray.length > 0 && tweenArray.length > scrollTop) {
+				hand.style.transform = `rotate(${tweenArray[scrollTop].x}deg) scale(${tweenArray[scrollTop].y}) translate3d(-${scrollTop}px, 0, 0)`
 		}
 });
 const countUpFrom = new CountUp("from", 1913, countUpOptions);
