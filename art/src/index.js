@@ -980,7 +980,6 @@ container.addEventListener("scroll", ({ target: { scrollTop } }) => {
 
 // for mobile
 window.addEventListener('scroll', () => {
-  console.log(window.scrollY);
   if (window.scrollY > 3720) {
     typeface.classList.add("animated", "bounceInDown");
   }
