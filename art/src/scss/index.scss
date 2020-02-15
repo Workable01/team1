@@ -111,6 +111,12 @@ strong.yess {
     }
 }
 
-.markdown-body {
-    padding: 30px 20px;
+.footer {
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    background: $dark;
+    color: $vanilla;
+    height: 100px;
+    font-size: 28px;
 }
