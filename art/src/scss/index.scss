@@ -2,6 +2,7 @@
 @import '_iphone.scss';
 @import '_animations.scss';
 @import '_markdown-overrides.scss';
+@import 'animate.scss';
 
 $red: #D71B1F;
 $secondRed: #FE4526;
@@ -111,6 +112,16 @@ strong.yess {
     }
 }
 
+.typeface {
+    width: 100%;
+    height: 130px;
+    font-size: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Molot';
+}
+
 .footer {
     display: flex;
     align-items: center;
@@ -119,4 +130,11 @@ strong.yess {
     color: $vanilla;
     height: 100px;
     font-size: 25px;
+
+    a {
+        color: $vanilla;
+    }
+    span {
+        padding: 0 10px;
+    }
 }
