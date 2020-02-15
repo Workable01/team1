@@ -975,6 +975,7 @@ container.addEventListener("scroll", ({ target: { scrollTop } }) => {
   }
   if (scrollTop > 3950) {
     typeface.classList.add("animated", "bounceInDown");
+    typeface.style.visibility = 'visible';
   }
 });
 
@@ -982,6 +983,7 @@ container.addEventListener("scroll", ({ target: { scrollTop } }) => {
 window.addEventListener('scroll', () => {
   if (window.scrollY > 3720) {
     typeface.classList.add("animated", "bounceInDown");
+    typeface.style.visibility = 'visible';
   }
 });
 
