@@ -36,6 +36,12 @@ main {
     margin: auto;
 }
 
+figure {
+    color: #6a737d;
+    font-size: 0.9em;
+    margin: 10px 0;
+}
+
 strong.yess {
     position: relative;
     color: $vanilla;
@@ -120,6 +126,7 @@ strong.yess {
     align-items: center;
     justify-content: center;
     font-family: 'Molot';
+    color: $dark;
     visibility: hidden;
 }
 

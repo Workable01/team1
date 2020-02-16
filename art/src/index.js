@@ -973,7 +973,7 @@ container.addEventListener("scroll", ({ target: { scrollTop } }) => {
   if (tweenArray.length > 0 && tweenArray.length > scrollTop) {
     hand.style.transform = `rotate(${tweenArray[scrollTop].x}deg) scale(${tweenArray[scrollTop].y}) translate3d(-${scrollTop}px, 0, 0)`;
   }
-  if (scrollTop > 3950) {
+  if (scrollTop > 3915) {
     typeface.classList.add("animated", "bounceInDown");
     typeface.style.visibility = 'visible';
   }
@@ -981,7 +981,7 @@ container.addEventListener("scroll", ({ target: { scrollTop } }) => {
 
 // for mobile
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 3720) {
+  if (window.scrollY > 3710) {
     typeface.classList.add("animated", "bounceInDown");
     typeface.style.visibility = 'visible';
   }
