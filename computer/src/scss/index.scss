@@ -1,0 +1,150 @@
+@import '_markdown-css.scss';
+@import '_iphone.scss';
+@import '_animations.scss';
+@import '_markdown-overrides.scss';
+@import 'animate.scss';
+
+$red: #D71B1F;
+$secondRed: #FE4526;
+$dark: #221E20;
+$vanilla: #FDF5C6;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+body {
+    padding: 30px;
+    font-family: 'Molot';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+
+    @media only screen and (max-width: 450px) {
+        height: auto;
+        display: block;
+        padding: 0;
+    }
+}
+
+main {
+    margin: auto;
+}
+
+figure {
+    color: #6a737d;
+    font-size: 0.9em;
+    margin: 10px 0;
+}
+
+strong.yess {
+    position: relative;
+    color: $vanilla;
+    font-family: 'Molot';
+    text-shadow: 2px 0 0 $dark, -2px 0 0 $dark, 0 2px 0 $dark, 0 -2px 0 $dark, 1px 1px $dark, -1px -1px 0 $dark, 1px -1px 0 $dark, -1px 1px 0 $dark;
+    &::before {
+        content: '';
+        z-index: -1;
+        top: 30%;
+        width: 100%;
+        height: 100%;
+        background: red;
+        border-bottom: 10px solid $vanilla;
+        position: absolute;
+    }
+}
+
+.hero-section {
+    height: 650px;
+    width: 100%;
+    background: linear-gradient(120deg, $secondRed, $red);
+    position: relative;
+    letter-spacing: 2px;
+    font-size: 39px;
+    font-family: 'Molot';
+    color: $vanilla;
+    overflow: hidden;
+
+    h1 {
+        font-size: 36px;
+        border: none;
+        margin: 0;
+        z-index: 4;
+        top: 62px;
+        left: 42px;
+        position: absolute;
+    }
+
+    .header {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        padding-left: 30px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: $dark;
+        height: 100px;
+        font-size: 40px;
+
+        #from, #to {
+            width: 85px;
+        }
+        #separator {
+            width: 40px;
+            text-align: center;
+        }
+    }
+
+    #polygon {
+        left: -289px;
+        top: -259px;
+        position: absolute;
+    }
+    #hand {
+        background: none;
+        position: absolute;
+        z-index: 2;
+        right: -80px;
+        width: 350px;
+        bottom: -5px;
+        transform: rotate(-20deg);
+        //animation: hand 1s ease-in-out infinite alternate;
+    }
+}
+
+.typeface {
+    width: 100%;
+    height: 130px;
+    font-size: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Molot';
+    color: $dark;
+    visibility: hidden;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    background: $dark;
+    color: $vanilla;
+    height: 100px;
+    font-size: 25px;
+    border-top: 15px solid $red;
+    border-bottom: 15px solid $red;
+
+    a {
+        color: $vanilla;
+    }
+    span {
+        padding: 0 10px;
+    }
+}
