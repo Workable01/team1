@@ -24,6 +24,88 @@ body {
     }
 }
 
+header {
+    background: #0D1621;
+    color: white;
+
+    nav {
+        max-width: 900px;
+        margin: auto;
+        padding: 15px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        justify-items: start;
+
+        @media only screen and (max-width: 720px) {
+            grid-template-columns: 1fr;
+            grid-gap: 20px;
+            padding: 25px 15px;
+        }
+
+        svg {
+            height: 60px;
+            width: 60px;
+            color: white;
+            fill: white;
+        }
+    }
+    nav ul {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        list-style-type: none;
+
+        @media only screen and (max-width: 690px) {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        li {
+            display: block;
+            margin-right: 25px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            a {
+                text-decoration: none;
+                position: relative;
+                color: rgba(255, 255, 255, 0.3); 
+                font-size: 17px;
+                z-index: 0;
+                cursor: pointer;
+                
+                &.active {
+                    color: white;
+                }
+            }
+
+            a:before {
+                position: absolute;
+                color: #FFF;
+                top: 0px;
+                left: 0px;
+                padding: 0px;
+                overflow: hidden;
+                content: attr(alt);
+                transition: all 0.3s;
+                transform: scale(0.8);
+                opacity: 0;
+            } 
+
+            a:hover:before {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    }
+    
+}
+
+
+
+
 main {
     margin: auto;
 }
@@ -40,22 +122,26 @@ figure {
 
 .markdown-body {
     max-width: 900px;
-    margin: auto;
+    margin: 30px auto;
 }
 
 .footer {
     display: flex;
     align-items: center;
-    padding-left: 15px;
-    background: $dark;
-    color: $vanilla;
-    height: 100px;
-    font-size: 25px;
+    padding: 30px 30px;
+    font-size: 20px;
+    justify-content: space-between;
+    background: #0D1621;
+    color: white;
 
     a {
-        color: $vanilla;
+        color: white;
     }
     span {
         padding: 0 10px;
+
+        &:first-of-type {
+            font-size: 14px;
+        }
     }
 }
