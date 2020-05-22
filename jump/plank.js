@@ -13,22 +13,31 @@ export class Plank {
     this.type = type;
     switch (type) {
       case "NORMAL":
-        this.color = "#6D6875";
+        this.color = "#f1e9da";
         break;
       case "BOOST":
-        this.color = "#02c39a";
+        this.color = "#ffd400";
         break;
       case "FINISH":
-        this.color = "red";
+        this.color = "#541388";
         break;
       default:
-        this.color = "#6D6875";
+        this.color = "#f1e9da";
         break;
     }
   }
 
   draw() {
-    //this.y += this.speed;
+    if (this.y >= window.game.groundY) {
+      this.remove = true;
+    }
+    if (this.visible) {
+      this.ctx.fillStyle = this.color;
+      this.ctx.fillRect(this.x, this.y, this.width, this.height);
+    }
+  }
+
+  move() {
     if (this.moving) {
       if (this.x + this.width >= window.game.width) {
         this.direction = -1;
@@ -36,13 +45,6 @@ export class Plank {
         this.direction = 1;
       }
       this.x += 2 * this.direction;
-    }
-    if (this.y >= window.game.groundY) {
-      this.remove = true;
-    }
-    if (this.visible) {
-      this.ctx.fillStyle = this.color;
-      this.ctx.fillRect(this.x, this.y, this.width, this.height);
     }
   }
 }

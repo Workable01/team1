@@ -27,9 +27,9 @@ export class Character {
   }
 
   draw() {
-    this.ctx.fillStyle = "#B5838D";
+    this.ctx.fillStyle = "#d90368";
     this.ctx.fillRect(this.x, this.y, this.width, this.height);
-    this.ctx.fillStyle = "#ffcdb2";
+    this.ctx.fillStyle = "white";
     this.ctx.fillRect(this.x + this.eye.offset, this.y + this.eye.offset + 10, this.eye.size, this.eye.size);
     this.ctx.fillRect(
       this.x + this.width - this.eye.offset - this.eye.size,

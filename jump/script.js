@@ -49,7 +49,7 @@ character.planks = planks;
 let translateY = 0;
 
 ctx.save();
-ctx.fillStyle = "#FFB4A2";
+ctx.fillStyle = "#2e294e";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 ctx.translate(0, translateY);
@@ -59,13 +59,22 @@ planks.forEach((plank) => {
 character.draw();
 ctx.restore();
 
-const gameLoop = () => {
+const updateLoop = () => {
+  character.move();
+  planks.forEach((plank) => {
+    plank.move();
+  });
+  setTimeout(updateLoop, 1000 / 60);
+};
+
+updateLoop();
+
+const drawLoop = () => {
   ctx.save();
-  ctx.fillStyle = "#FFB4A2";
+  ctx.fillStyle = "#2e294e";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.translate(0, (translateY += 3));
 
-  character.move();
   planks.forEach((plank) => {
     plank.draw();
     if (plank.remove) {
@@ -81,13 +90,13 @@ const gameLoop = () => {
   if (character.y >= canvas.height - translateY) {
     window.location.reload();
   } else {
-    requestAnimationFrame(gameLoop);
+    requestAnimationFrame(drawLoop);
   }
 };
 
 const startGame = () => {
   window.removeEventListener("keydown", startGame);
-  requestAnimationFrame(gameLoop);
+  requestAnimationFrame(drawLoop);
 };
 
 window.addEventListener("keydown", startGame);
