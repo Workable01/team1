@@ -61,6 +61,7 @@ ctx.restore();
 
 const updateLoop = () => {
   character.move();
+  translateY += 3;
   planks.forEach((plank) => {
     plank.move();
   });
@@ -73,7 +74,7 @@ const drawLoop = () => {
   ctx.save();
   ctx.fillStyle = "#2e294e";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.translate(0, (translateY += 3));
+  ctx.translate(0, translateY);
 
   planks.forEach((plank) => {
     plank.draw();
